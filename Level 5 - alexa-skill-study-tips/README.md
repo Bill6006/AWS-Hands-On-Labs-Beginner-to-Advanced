@@ -1,0 +1,1 @@
+Project 8: Create an Alexa Skill that provides study tips using AWS Lambda and DynamoDB

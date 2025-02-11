@@ -1,0 +1,1 @@
+Project 9: Recognize celebrities using Amazon Rekognition, AWS Lambda, and Amazon S3

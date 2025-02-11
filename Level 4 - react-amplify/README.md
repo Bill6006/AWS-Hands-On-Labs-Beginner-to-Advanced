@@ -1,0 +1,1 @@
+Project 7: Deploy a Simple React Web Application using AWS Amplify

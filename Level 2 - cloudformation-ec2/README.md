@@ -1,0 +1,1 @@
+Project 2: Use CloudFormation to Launch an Amazon EC2 Web Server
