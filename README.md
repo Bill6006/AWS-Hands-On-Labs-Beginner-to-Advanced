@@ -8,7 +8,7 @@ These projects may offer you a chance to accelerate your cloud career by working
 
 ## Table of Contents
 
-1. Launch a Static Website on Amazon S3
+1. How to Deploy a Serverless Static Website on AWS: S3, CloudFront, Route 53 & ACM
 2. Use CloudFormation to Launch an Amazon EC2 Web Server
 3. Add a CI/CD Pipeline to an Amazon S3 Bucket
 4. Deploy a Simple React Web Application using AWS Amplify
@@ -23,7 +23,7 @@ These projects may offer you a chance to accelerate your cloud career by working
 
 ## Overview of Projects
 
-### 1: Launch a Static Website on Amazon S3  
+### 1: How to Deploy a Serverless Static Website on AWS: S3, CloudFront, Route 53 & ACM 
 *Folder: `Level 1 - static-website-s3`*  
 Build a cost-effective static website by leveraging Amazon S3, CloudFront, Route 53, and AWS Certificate Manager. This beginner-friendly project introduces you to core AWS services while hosting your website globally.
 
