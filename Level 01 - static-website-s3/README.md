@@ -59,8 +59,16 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
-2. Create a new CloudFront distribution and point it to your S3 bucket.
+2. Create a new CloudFront distribution and point it to your S3 bucket’s static **website hosting endpoint.** (May receive a prompt to select this.)
 3. Enable HTTPS and customize cache settings. (Ensures secure and encrypted content delivery).
+4. Under Viewer Protocol Policy:
+   - Select Redirect HTTP to HTTPS or HTTPS Only for security.
+### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
+1. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
+    > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
+2. Select Request a public certificate > Enter your domain name > DNS validation > Request
+3. Wait for validation (can take a few minutes to hours)
+4. Back in the **CloudFront distribution** > Assign the new **ACM certificate** for encrypted communication.
 
 ### Step 5: Configure DNS Records in Route 53
 After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
@@ -73,12 +81,7 @@ After your CloudFront distribution is set up, update your DNS records so that yo
    - **TTL:** Use the default value
 3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
 
-### Step 6: Request an SSL Certificate in AWS Certificate Manager
-1. Open the **AWS Certificate Manager**.
-2. Request a public SSL certificate for your domain.
-3. Validate the certificate via DNS verification using Route 53.
-
-### Step 7: Test the Deployment
+### Step 6: Test the Deployment
 1. Open your domain in a browser to verify that everything is working correctly.
 2. Check SSL status and CloudFront caching behavior and that that the SSL padlock appears if you configured https.
 
