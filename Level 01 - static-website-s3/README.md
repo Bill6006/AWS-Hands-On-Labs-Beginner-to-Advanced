@@ -79,6 +79,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
       - **Value**: Paste the **Value** from ACM.
 10. Wait for validation (can take a few minutes up to 48 hours)
 11. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+    > **Note:** May have to click the refresh icon
 
 ### Step 5: Configure DNS Records in Route 53
 After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
