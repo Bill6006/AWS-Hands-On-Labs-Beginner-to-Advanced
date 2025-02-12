@@ -20,7 +20,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ## Deployment Steps
 
 ### Step 1: Purchase a Domain and Configure Route 53
-> **Note:** If you are using a domain from an external registrar (ex., Namecheap, GoDaddy, IONOS), check the **"For domains registered with an external registrar"** section at the bottom for additional steps. 
+> **Note:** If you are using a domain from an external registrar (ex., Namecheap, GoDaddy, IONOS), check the **"For domains registered with an external registrar"** section below for additional steps. 
 1. Open the AWS Route 53 console.
 2. Navigate to Domains > Registered Domains and click Register Domain.
 3. Search for an available domain name, select one, and complete the registration.
