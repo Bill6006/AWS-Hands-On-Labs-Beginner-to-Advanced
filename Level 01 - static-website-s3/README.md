@@ -55,7 +55,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
    - The **Bucket Policy** file is also found in the **Resources** folder. (Copy code from this file then paste into Bucket Policy) 
     > **Note:** You will need to change the `Bucket-Name` within the code to your Bucket Name. Then **Save Changes**
-2. Test to confirm Website is up and running by going to **Objects**, click **index.html**, then **Open** in top left corner. 
+2. Test to confirm Website is up and running by going to **Objects**, click **index.html**, then **Open** in top right corner. 
 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
@@ -68,7 +68,8 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 2. Create a new record:
    - **Record Type:** A – IPv4 address
    - **Alias:** Enabled
-   - **Alias Target:** Select your **CloudFront Distribution**
+   - **Alias Target Endpoint:** Select your **CloudFront Distribution**
+       > **Note:** If you are not using **CloudFront Distribution**, choose **S3 website endpoint**, your **region**, and your **S3 Endpoint**.
    - **TTL:** Use the default value
 3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
 
