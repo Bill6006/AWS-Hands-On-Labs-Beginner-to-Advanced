@@ -75,7 +75,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
    1. Go to **Hosted Zones** and select your domain (if using Route 53).
    2. Create a **CNAME** record:
       - **Record name**: Paste the **Name** from ACM (including any underscores).
-    > **Note:** - If you see a final `.` or `.<your-domain>.` added and the end of the record name, remove that portion so it exactly matches the name provided by ACM.  
+    > **Note:** - If you see a final `.` or `.<your-domain>` added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
       - **Value**: Paste the **Value** from ACM.
 10. Wait for validation (can take a few minutes up to 48 hours)
 11. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
