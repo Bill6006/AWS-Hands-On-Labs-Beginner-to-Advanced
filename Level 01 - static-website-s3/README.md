@@ -63,7 +63,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 3. Enable HTTPS and customize cache settings. (Ensures secure and encrypted content delivery).
 4. Under Viewer Protocol Policy:
    - Select Redirect HTTP to HTTPS or HTTPS Only for security.
-> #### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
+#### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
 5. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 6. Select Request a public certificate > Enter your domain name > DNS validation > Request
