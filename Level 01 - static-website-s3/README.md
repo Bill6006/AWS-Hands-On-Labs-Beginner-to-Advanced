@@ -29,7 +29,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 4. AWS will automatically configure Route 53 as the DNS service for your domain.
 > **Note:** DNS propagation (can take from a few minutes to 48 hours).
 
-**For domains registered with an external registrar:**  
+*(Optional)* **For domains registered with an external registrar:**  
   > **Example:**  (Namecheap, GoDaddy, IONOS, etc)
 1. Purchase your domain from your preferred registrar.
 2. Open the AWS Route 53 console and navigate to **Hosted Zones**.
