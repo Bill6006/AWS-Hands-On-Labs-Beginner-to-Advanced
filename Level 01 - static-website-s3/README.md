@@ -44,12 +44,12 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 2. Create a new bucket and name it the same as your domain (ex., `example.com`).
 3. Uncheck "Block *all* public access
 4. Check "I acknowledge..." to Turn off block all public access, then Create Bucket.
-8. Under the Objects tab in your Bucket settings, Click "Upload".
-9. Upload your static website files.  
+5. Under the Objects tab in your Bucket settings, Click "Upload".
+6. Upload your static website files.  
    - The necessary files are located in the **Resources** folder of this repository called **index.html**.
-5. Under Bucket's **Properties** Tab, scroll down to "Static website hosting", select "Edit" then "Enable".
-6. Choose "Host a static website".
-7. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
+7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting", select "Edit" then "Enable".
+8. Choose "Host a static website".
+9. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
 
 ### Step 3: Configure Permissions
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
