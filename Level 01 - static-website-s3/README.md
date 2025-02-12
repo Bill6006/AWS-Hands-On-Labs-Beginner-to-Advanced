@@ -37,7 +37,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 4. Copy the four **Nameservers (NS records)** provided by AWS.  
    > **Note:** You may copy the Name Servers without the ending "." (ex., `ns-1001.exam-ple.co.uk`).
 5. Update your NS records at your external registrar by locating the Name Server portion in the DNS/Domain Manage settings (this step varies by provider).
-6. Wait for DNS propagation (can take up to 48 hours).
+> **Note:** DNS propagation (can take from a few minutes to 48 hours).
 
 ### Step 2: Create an S3 Bucket for Static Website Hosting
 1. Open the **Amazon S3** console.
