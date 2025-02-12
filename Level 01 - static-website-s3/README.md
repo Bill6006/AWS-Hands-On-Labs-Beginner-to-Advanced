@@ -67,7 +67,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 1. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 2. Select Request a public certificate > Enter your domain name > DNS validation > Request
-3. Wait for validation (can take a few minutes to hours)
+3. Wait for validation (can take a few minutes up to 48 hours)
 4. Back in the **CloudFront distribution** > Assign the new **ACM certificate** for encrypted communication.
 
 ### Step 5: Configure DNS Records in Route 53
