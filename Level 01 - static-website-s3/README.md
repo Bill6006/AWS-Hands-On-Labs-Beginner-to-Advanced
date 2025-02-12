@@ -47,15 +47,15 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 5. Under the Objects tab in your Bucket settings, Click "Upload".
 6. Upload your static website files.  
    - The necessary files are located in the **Resources** folder of this repository called **index.html**.
-7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting", select "Edit" then "Enable".
+7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting" > "Edit" > "Enable".
 8. Choose "Host a static website".
 9. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
 
 ### Step 3: Configure Permissions
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
    - The **Bucket Policy** file is also found in the **Resources** folder. (Copy code from this file then paste into Bucket Policy) 
-    > **Note:** You will need to change the `Bucket-Name` within the code to your Bucket Name. Then **Save Changes**
-2. Test to confirm Website is up and running by going to **Objects**, click **index.html**, then **Open** in top right corner. 
+    > **Note:** You will need to change the `Bucket-Name` within the code, to your Bucket Name. Then **Save Changes**
+2. Test to confirm Website is up and running by going to **Objects** > **index.html** > **Open**. 
 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
