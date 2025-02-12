@@ -29,6 +29,16 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 4. AWS will automatically configure Route 53 as the DNS service for your domain.
 > **Note:** DNS propagation (can take from a few minutes to 48 hours).
 
+**For domains registered with an external registrar:**  
+  > **Example:**  (Namecheap, GoDaddy, IONOS, etc)
+1. Purchase your domain from your preferred registrar.
+2. Open the AWS Route 53 console and navigate to **Hosted Zones**.
+3. Click **Create Hosted Zone**, enter your domain name, and select **Public Hosted Zone**.
+4. Copy the four **Nameservers (NS records)** provided by AWS.  
+   > **Note:** You may copy the Name Servers without the ending "." (ex., `ns-1001.exam-ple.co.uk`).
+5. Update your NS records at your external registrar by locating the Name Server portion in the DNS/Domain Manage settings (this step varies by provider).
+6. Wait for DNS propagation (can take up to 48 hours).
+
 ### Step 2: Create an S3 Bucket for Static Website Hosting
 1. Open the **Amazon S3** console.
 2. Create a new bucket and name it the same as your domain (ex., `example.com`).
@@ -46,12 +56,22 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 2. Create a new CloudFront distribution and point it to your S3 bucket.
 3. Enable HTTPS and customize cache settings.
 
-### Step 5: Request an SSL Certificate in AWS Certificate Manager
+### Step 5: Configure DNS Records in Route 53
+After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
+1. Open your domain's hosted zone in the **Route 53** console.
+2. Create a new record:
+   - **Record Type:** A – IPv4 address
+   - **Alias:** Enabled
+   - **Alias Target:** Select your **CloudFront Distribution**
+   - **TTL:** Use the default value
+3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
+
+### Step 6: Request an SSL Certificate in AWS Certificate Manager
 1. Open the **AWS Certificate Manager**.
 2. Request a public SSL certificate for your domain.
 3. Validate the certificate via DNS verification using Route 53.
 
-### Step 6: Test the Deployment
+### Step 7: Test the Deployment
 1. Open your domain in a browser to verify that everything is working correctly.
 2. Check SSL status and CloudFront caching behavior.
 
