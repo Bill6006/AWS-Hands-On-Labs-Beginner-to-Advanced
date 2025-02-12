@@ -1,6 +1,6 @@
 # AWS Hands-on Projects Collection
 
-Welcome to the AWS Hands-on Projects Collection! This repository brings together 10 fun, practical projects designed to help you build real-world applications using AWS services. Each project is contained in its own folder complete with a detailed README to guide you through setup, prerequisites, and step-by-step instructions.
+Welcome to the AWS Hands On Labs: Beginner to Advanced Projects Collection! This repository brings together 10 fun, practical projects designed to help you build real-world applications using AWS services. Each project is contained in its own folder complete with a detailed README to guide you through setup, prerequisites, and step-by-step instructions.
 
 These projects may offer you a chance to accelerate your cloud career by working directly with services like Amazon S3, EC2, Lambda, SageMaker, and more.
 
