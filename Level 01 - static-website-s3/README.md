@@ -1,4 +1,4 @@
-# How to Deploy Secure Static Website on AWS Using S3, CloudFront, and Route 53
+# How to Deploy a Secure Serverless Static Website on AWS: S3, CloudFront, Route 53 & ACM
 
 This repository showcases my AWS projects and lessons learned while deploying a static website using various AWS services.
 
@@ -80,7 +80,7 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 
 ### Step 7: Test the Deployment
 1. Open your domain in a browser to verify that everything is working correctly.
-2. Check SSL status and CloudFront caching behavior.
+2. Check SSL status and CloudFront caching behavior and that that the SSL padlock appears if you configured https.
 
 ---
 
