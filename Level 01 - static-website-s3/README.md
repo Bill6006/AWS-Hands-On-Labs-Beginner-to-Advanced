@@ -42,14 +42,20 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ### Step 2: Create an S3 Bucket for Static Website Hosting
 1. Open the **Amazon S3** console.
 2. Create a new bucket and name it the same as your domain (ex., `example.com`).
-3. Enable **Static Website Hosting** in the bucket properties.
-4. Upload your static website files.  
+3. Uncheck "Block *all* public access
+4. Check "I acknowledge..." to Turn off block all public access, then Create Bucket.
+8. Under the Objects tab in your Bucket settings, Click "Upload".
+9. Upload your static website files.  
    - The necessary files are located in the **Resources** folder of this repository called **index.html**.
+5. Under Bucket's **Properties** Tab, scroll down to "Static website hosting", select "Edit" then "Enable".
+6. Choose "Host a static website".
+7. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
 
 ### Step 3: Configure Permissions
-1. Modify the **Bucket Policy** to allow public read access.
-   - The **Bucket Policy** file is also found in the **Resources** folder.  
-2. Enable cross-origin resource sharing (CORS) if necessary.
+1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
+   - The **Bucket Policy** file is also found in the **Resources** folder. (Copy code from this file then paste into Bucket Policy) 
+    > **Note:** You will need to change the `Bucket-Name` within the code to your Bucket Name. Then **Save Changes**
+2. Test to confirm Website is up and running by going to **Objects**, click **index.html**, then **Open** in top left corner. 
 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
