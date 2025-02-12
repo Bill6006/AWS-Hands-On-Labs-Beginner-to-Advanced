@@ -57,13 +57,13 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > **Note:** You will need to change the `Bucket-Name` within the code, to your Bucket Name. Then **Save Changes**
 2. Test to confirm Website is up and running by going to **Objects** > **index.html** > **Open**. 
 
-### Step 4: Set Up CloudFront for Content Distribution // Request an SSL Certificate in AWS Certificate Manager
+### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
 2. Create a new CloudFront distribution and point it to your S3 bucket’s static **website hosting endpoint.** (May receive a prompt to select this.)
 3. Enable HTTPS and customize cache settings. (Ensures secure and encrypted content delivery).
 4. Under Viewer Protocol Policy:
    - Select Redirect HTTP to HTTPS or HTTPS Only for security.
-#### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
+### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
 5. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 6. Select Request a public certificate > Enter your domain name > DNS validation > Request
