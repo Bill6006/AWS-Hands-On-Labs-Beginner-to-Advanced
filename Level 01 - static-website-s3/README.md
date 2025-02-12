@@ -60,7 +60,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
 2. Create a new CloudFront distribution and point it to your S3 bucket.
-3. Enable HTTPS and customize cache settings.
+3. Enable HTTPS and customize cache settings. (Ensures secure and encrypted content delivery).
 
 ### Step 5: Configure DNS Records in Route 53
 After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
