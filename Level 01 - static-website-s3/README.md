@@ -35,7 +35,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 2. Open the AWS Route 53 console and navigate to **Hosted Zones**.
 3. Click **Create Hosted Zone**, enter your domain name, and select **Public Hosted Zone**.
 4. Copy the four **Nameservers (NS records)** provided by AWS.  
-   > **Note:** You may copy the Name Servers without the ending "." (ex., `ns-1001.exam-ple.co.uk`).
+   > **Note:** Copy the Name Servers without the ending "." (ex., `ns-1001.exam-ple.co.uk`).
 5. Update your NS records at your external registrar by locating the Name Server portion in the DNS/Domain Manage settings (this step varies by provider).
 > **Note:** DNS propagation (can take from a few minutes to 48 hours).
 
