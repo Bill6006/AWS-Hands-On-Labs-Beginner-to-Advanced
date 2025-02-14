@@ -78,7 +78,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
     > - **Copy** the **Name** and **Value** for the CNAME record exactly as shown in ACM.
     > - Open the **Route 53** console:
-    > - Go to **Hosted Zones** and select your domain (if using Route 53).
+    > - Go to **Hosted Zones** and select your domain.
     > - Create a **CNAME** record:
     > - **Record name**: Paste the **Name** from ACM (including any underscores).
     > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
@@ -144,31 +144,8 @@ Overall, for a small static website, your monthly AWS bill (outside of domain re
 - [Amazon CloudFront User Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)
 - [AWS Route 53 Documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html)
 
----
 
-## **If Using an External Domain Registrar**
-If your domain is registered with a third-party provider (ex., Namecheap, GoDaddy, ionos.com), follow these additional steps:  
 
-### **Step 1: Create a Hosted Zone in Route 53**  
-1. Open **Route 53** and navigate to **Hosted Zones**.  
-2. Click **Create Hosted Zone**, enter your domain name, and select **Public Hosted Zone**.  
-3. Copy the four **Nameservers (NS records)** provided by AWS.  
-> **Note:** May copy the Nameservers without the ending "." for ex. "ns-1001.exam-ple.co.uk"
-4. Update your **NS records** at your external registrar (this step varies by provider).  
-5. Wait for DNS propagation (can take up to 48 hours).  
-
-### **Step 2: Create DNS Records**  
-1. **A Record (Alias) for CloudFront:**  
-   - In your hosted zone, click **Create Record**.  
-   - Select **A - IPv4 address** as the record type.  
-   - Enable **Alias** and set the target to your **CloudFront Distribution**.  
-   - Click **Create Record**.  
-
-2. **CNAME Record for Subdomains (If Needed):**  
-   - Click **Create Record**.  
-   - Select **CNAME** as the type.  
-   - Enter the subdomain (`www.example.com`) and point it to the CloudFront domain name.  
-   - Save the record.  
 
 ---
 
