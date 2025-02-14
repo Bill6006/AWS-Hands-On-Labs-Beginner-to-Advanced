@@ -89,15 +89,15 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 9. Within the **AWS Certificate Manager (ACM)** console:
    - Choose the **"Create records in Route 53"** > **Create records**<br><br>
    > **Note:** If option to select "Create Records" is unavailable:
-    > Within the **AWS Certificate Manager (ACM)** console:
-    > - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
-    > - **Copy** the **Name** and **Value** for the CNAME record exactly as shown in ACM.
-    > - Open the **Route 53** console:
-    > - Go to **Hosted Zones** and select your domain.
-    > - Create a **CNAME** record:
-    > - **Record name**: Paste the **Name** from ACM (including any underscores).
-    > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
-    > - Paste the **Value** from ACM.
+  > Within the **AWS Certificate Manager (ACM)** console:
+  > - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
+  > - **Copy** the **Name** and **Value** for the CNAME record exactly as shown in ACM.
+  > - Open the **Route 53** console:
+  > - Go to **Hosted Zones** and select your domain.
+  > - Create a **CNAME** record:
+  > - **Record name**: Paste the **Name** from ACM (including any underscores).
+  > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
+  > - Paste the **Value** from ACM.
 
 #### Creating an A Record
 1. Open your domain's hosted zone in the **Route 53** console.
