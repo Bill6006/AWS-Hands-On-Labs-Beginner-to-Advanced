@@ -108,7 +108,7 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 2. Check SSL status and CloudFront caching behavior and that that the SSL padlock appears if you configured https.<br><br><br>
 
 --- 
-
+<br>
 --- 
 ## End Of Project
  <br>
