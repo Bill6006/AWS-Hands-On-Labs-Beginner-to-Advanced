@@ -66,11 +66,12 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 5. Under the **Alternate domain name (CNAME) - optional** field, enter your custom domain name (ex., example.com or www.example.com).
     > **IMPORTANT:** Configuring a CNAME allows you to access your website using your custom domain.
 > *From here continue to Step 4.5*
+
 ### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
 6. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 7. Wait for validation (can take a few minutes up to 48 hours)
-8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication then save.
 
 > **Note:** May have to click the refresh icon  
 > **Also:** Your distribution is not fully ready until the "**Last Modified**" changes from:
