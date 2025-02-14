@@ -71,10 +71,10 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 6. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 7. Wait for validation (can take a few minutes up to 48 hours)
-8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication then save.
+8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
 
 > **Note:** May have to click the refresh icon  
-> **Also:** Your distribution is not fully ready until the "**Last Modified**" changes from:
+> **Also:** After creating, your distribution is not fully ready until the "**Last Modified**" changes from:
 >
 > ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
 >
