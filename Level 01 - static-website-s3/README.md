@@ -107,8 +107,11 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 1. Open your domain in a browser to verify that everything is working correctly.
 2. Check SSL status and CloudFront caching behavior and that that the SSL padlock appears if you configured https.<br><br><br>
 
+--- 
+
+--- 
 ## End Of Project
- <br><br>
+ <br>
 --- 
 
 <br><br>
