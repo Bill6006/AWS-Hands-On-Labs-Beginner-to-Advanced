@@ -75,7 +75,9 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > **Note:** May have to click the refresh icon
     > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
 ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
+
     > **To:** 
+    
 ![alt text](<Resources/Images/last modified.png>)
 
 ### Step 5: Configure DNS Records in Route 53
