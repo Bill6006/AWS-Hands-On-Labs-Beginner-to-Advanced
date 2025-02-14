@@ -72,11 +72,15 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 8. Wait for validation (can take a few minutes up to 48 hours)
 9. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
-    > **Note:** May have to click the refresh icon
-    > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
-![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
-    > **To:** 
-![alt text](<Resources/Images/last modified.png>)
+
+> **Note:** May have to click the refresh icon  
+> **Also:** Your distribution is not fully ready until the "**Last Modified**" changes from:
+>
+> ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
+>
+> **To:**  
+> ![Last Modified Updated](Resources/Images/last_modified.png)
+
 
 ### Step 5: Configure DNS Records in Route 53
 #### Creating a CNAME Record
@@ -95,6 +99,7 @@ After your CloudFront distribution is set up, update your DNS records so that yo
     > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
     > - Paste the **Value** from ACM.
 
+#### Creating an A Record
 1. Open your domain's hosted zone in the **Route 53** console.
 2. Create a new record:
    - **Record Type:** A – IPv4 address
