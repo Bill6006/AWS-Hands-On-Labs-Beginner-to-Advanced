@@ -109,7 +109,8 @@ After your CloudFront distribution is set up, update your DNS records so that yo
 
 End Of Project
 ---
----<br><br><br>
+--- 
+<br><br><br>
 
 ## Additional Enhancements
 - **Enable Logging & Monitoring** – Use AWS CloudWatch and S3 logging to track access.
