@@ -72,7 +72,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 8. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
 9. Within the **AWS Certificate Manager (ACM)** console:
-   - Choose the **"Create records in Route 53"** > **Create records**
+   - Choose the **"Create records in Route 53"** > **Create records**<br><br>
    > **Note:** If option to select "Create Records" is unavailable:
     > Within the **AWS Certificate Manager (ACM)** console:
     > - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
