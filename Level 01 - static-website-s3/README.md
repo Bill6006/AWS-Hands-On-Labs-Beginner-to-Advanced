@@ -70,6 +70,17 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
 7. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
+8. Wait for validation (can take a few minutes up to 48 hours)
+9. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+    > **Note:** May have to click the refresh icon
+    > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
+![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
+    > **To:** 
+![alt text](<Resources/Images/last modified.png>)
+
+### Step 5: Configure DNS Records in Route 53
+#### Creating a CNAME Record
+After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
 8. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
 9. Within the **AWS Certificate Manager (ACM)** console:
    - Choose the **"Create records in Route 53"** > **Create records**<br><br>
@@ -84,16 +95,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
     > - Paste the **Value** from ACM.
 
-10. Wait for validation (can take a few minutes up to 48 hours)
-11. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
-    > **Note:** May have to click the refresh icon
-    > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
-![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
-    > **To:** 
-![alt text](<Resources/Images/last modified.png>)
-
-### Step 5: Configure DNS Records in Route 53
-After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
+#### Creating an A Record
 1. Open your domain's hosted zone in the **Route 53** console.
 2. Create a new record:
    - **Record Type:** A – IPv4 address
