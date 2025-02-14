@@ -73,11 +73,22 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 8. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
 9. Within the **AWS Certificate Manager (ACM)** console:
    - Choose the **"Create records in Route 53"** > **Create records**
+    > **Note:** If option to select "Create Records" is unavailable:
+    > **Note:**     > Within the **AWS Certificate Manager (ACM)** console:
+    > **Note:** - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
+    > **Note:** - **Copy** the **Name** and **Value** for the CNAME record exactly as shown in ACM.
+    > **Note:** - Open the **Route 53** console:
+    > **Note:** - Go to **Hosted Zones** and select your domain (if using Route 53).
+    > **Note:** - Create a **CNAME** record:
+    > **Note:** - **Record name**: Paste the **Name** from ACM (including any underscores).
+    > **Note:** - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
+    > **Note:** - Paste the **Value** from ACM.
+
 10. Wait for validation (can take a few minutes up to 48 hours)
 11. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
     > **Note:** May have to click the refresh icon
     > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
-Level 01 - static-website-s3/Resources/Images/deploying.png
+![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
     > **To:** 
 ![alt text](<Resources/Images/last modified.png>)
 
