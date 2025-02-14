@@ -95,7 +95,6 @@ After your CloudFront distribution is set up, update your DNS records so that yo
     > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
     > - Paste the **Value** from ACM.
 
-#### Creating an A Record
 1. Open your domain's hosted zone in the **Route 53** console.
 2. Create a new record:
    - **Record Type:** A – IPv4 address
