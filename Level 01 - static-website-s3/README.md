@@ -77,7 +77,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 11. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
     > **Note:** May have to click the refresh icon
     > **Also:** Your distribution is not fully ready until the "**Last Modified**" Changes from:
-![alt text](Resources/Images/image.png)
+Level 01 - static-website-s3/Resources/Images/deploying.png
     > **To:** 
 ![alt text](<Resources/Images/last modified.png>)
 
