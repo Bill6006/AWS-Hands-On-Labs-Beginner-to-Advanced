@@ -60,18 +60,17 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
 2. Create a new CloudFront distribution and point it to your S3 bucket’s static content by selecting **Use website endpoint.** when prompted.
-3. Enable HTTPS and customize cache settings. (Ensures secure and encrypted content delivery).????????????????????????? need this part?
-4. Under Viewer Protocol Policy:
+3. Under Viewer Protocol Policy:
    - Select either Redirect HTTP to HTTPS or HTTPS Only to enhance security.
-5. Choose weather you would like to Enable or Disable **Web Application Firewall (WAF).** based on your security needs.
-6. Under the **Alternate domain name (CNAME) - optional** field, enter your custom domain name (ex., example.com or www.example.com).
+4. Choose weather you would like to Enable or Disable **Web Application Firewall (WAF).** based on your security needs.
+5. Under the **Alternate domain name (CNAME) - optional** field, enter your custom domain name (ex., example.com or www.example.com).
     > **IMPORTANT:** Configuring a CNAME allows you to access your website using your custom domain.
 > *From here continue to Step 4.5*
 ### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
-7. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
+6. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
-8. Wait for validation (can take a few minutes up to 48 hours)
-9. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+7. Wait for validation (can take a few minutes up to 48 hours)
+8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
 
 > **Note:** May have to click the refresh icon  
 > **Also:** Your distribution is not fully ready until the "**Last Modified**" changes from:
@@ -79,14 +78,14 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 > ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
 >
 > **To:**  
-> ![Last Modified Updated](Resources/Images/last_modified.png)
+> Level 01 - static-website-s3/Resources/Images/last modified.png
 
 
 ### Step 5: Configure DNS Records in Route 53
 #### Creating a CNAME Record
 After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
-8. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
-9. Within the **AWS Certificate Manager (ACM)** console:
+1. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
+2. Within the **AWS Certificate Manager (ACM)** console:
    - Choose the **"Create records in Route 53"** > **Create records**<br><br>
    > **Note:** If option to select "Create Records" is unavailable:
   > Within the **AWS Certificate Manager (ACM)** console:
@@ -100,8 +99,8 @@ After your CloudFront distribution is set up, update your DNS records so that yo
   > - Paste the **Value** from ACM.
 
 #### Creating an A Record
-1. Open your domain's hosted zone in the **Route 53** console.
-2. Create a new record:
+3. Open your domain's hosted zone in the **Route 53** console.
+4. Create a new record:
    - **Record Type:** A – IPv4 address
    - **Alias:** Enabled
    - **Alias Target Endpoint:** Select your **CloudFront Distribution**
