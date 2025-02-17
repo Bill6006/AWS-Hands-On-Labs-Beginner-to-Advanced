@@ -75,7 +75,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ## Configure DNS Records
 ### Step 5: (OPTION 1): Creating a CNAME Record 
 1. With the new Certificate selected, Select **Create records in Route 53** > **select** domain > **Create Records** 
-    > **Note:** If option to select you domain is greyed out, continue to **steps 3-6**
+    > **Note:** If option to select you domain is greyed out, continue to **steps 5-6**
 2. Wait for validation (can take a few minutes up to 48 hours) until you see this:
 
 ![alt text](<Resources/Images/ACM Status.png>)
@@ -95,10 +95,10 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ![alt text](<Resources/Images/ACM Status.png>)
 
-### Step 6: Complete CloudFront distribution setup
-7. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+### Step 6: Complete CloudFront distribution setup (Continued)
+1. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
 > **Note:** May have to click the refresh icon  
-4. Select **"Create Distribution"**
+2. Select **"Create Distribution"**
 > **Note:** After creating, your distribution is not fully ready until the "**Last Modified**" changes from:
 >
 > ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
@@ -109,14 +109,16 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 
 ### Step 7: Creating an A Record:
-3. Open your domain's hosted zone in the **Route 53** console.
-4. Create a new record:
+1. Open your domain's **hosted zone** in the **Route 53** console.
+2. Create a new record:
+   - **Simple Routing**
    - **Record Type:** A – IPv4 address
-   - **Alias:** Enabled
-   - **Alias Target Endpoint:** Select your **CloudFront Distribution**
+   - **Alias Endpoint:** "To CloudFront Distribution"
+   - **Distribution:** Select your **CloudFront Distribution**
        > **Note:** If you are not using **CloudFront Distribution**, choose **S3 website endpoint**, your **region**, and your **S3 Endpoint**.
-   - **TTL:** Use the default value
-3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
+  3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
+   - Select **Create Records**
+> **Note:** Once completed, you may click the notification at the top to view status.
 
 ### Step 8: Test the Deployment
 1. Open your domain in a browser to verify that everything is working correctly.
