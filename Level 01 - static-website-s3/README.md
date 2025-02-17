@@ -47,7 +47,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 5. Under the Objects tab in your Bucket settings, Click "Upload".
 6. Upload your static website files.  
    - The necessary file are located in the **Resources** folder of this repository called **index.html**.
-7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting" > "Edit" > "Enable".
+7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting" > "Edit" > "Enable" > name "Index Document" the file name "index.html".
 8. Choose "Host a static website".
 9. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
 
