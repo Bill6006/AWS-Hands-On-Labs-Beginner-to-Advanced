@@ -65,7 +65,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 4. Choose weather you would like to Enable or Disable **Web Application Firewall (WAF).** based on your security needs.
 5. Under the **Alternate domain name (CNAME) - optional** field, select **Add item** then enter your custom domain name (ex., example.com or www.example.com).
     > **IMPORTANT:** Configuring a CNAME allows you to access your website using your custom domain.
-> *From here continue to Step 4.5*
+> *Continue to the next part of this step*
 
 ### Step 4: CONTINUED: Request an SSL Certificate in AWS Certificate Manager
 6. Under "Custom SSL certificate - optional", choose **"Request Certificate"** > **Next**
