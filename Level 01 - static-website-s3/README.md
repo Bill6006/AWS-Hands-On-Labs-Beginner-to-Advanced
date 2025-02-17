@@ -76,6 +76,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 1. With the new Certificate selected, Select **Create records in Route 53** > **select** domain > **Create Records** 
     > **Note:** If option to select you domain is greyed out, continue to **steps 3-6**
 2. Wait for validation (can take a few minutes up to 48 hours) until you see this:
+
 ![alt text](<Resources/Images/ACM Status.png>)
 
 ### Step 5 (OPTION 2 FIX - ONLY IF "OPTION 1" DOESN'T WORK): Creating a CNAME Record Manually
@@ -90,6 +91,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
   > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
   > - Paste the **Value** from ACM.
 6. Wait for validation (can take a few minutes up to 48 hours)
+
 ![alt text](<Resources/Images/ACM Status.png>)
 
 ### Step 6: Complete CloudFront distribution setup
