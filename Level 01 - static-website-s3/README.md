@@ -46,10 +46,10 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 4. Check "I acknowledge..." to Turn off block all public access, then Create Bucket.
 5. Under the Objects tab in your Bucket settings, Click "Upload".
 6. Upload your static website files.  
-   - The necessary file are located in the **Resources** folder of this repository called **index.html**.
-7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting" > "Edit" > "Enable" > name "Index Document" the file name "index.html".
+   - The necessary files are located in the **Resources** folder of this repository called **index.html**.
+7. Under Bucket's **Properties** Tab, scroll down to "Static website hosting" > "Edit" > "Enable".
 8. Choose "Host a static website".
-9. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then Click Upload.
+9. Enter the index document name (ex. index.html which again is the one from the Resources folder), Then select save changes.
 
 ### Step 3: Configure Permissions
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
@@ -59,37 +59,27 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ### Step 4: Set Up CloudFront for Content Distribution
 1. Go to the **CloudFront** console.
-2. Create a new CloudFront distribution and point it to your S3 bucket’s static content by selecting **Use website endpoint.** when prompted.
+2. Create a new CloudFront distribution and point it to your S3 bucket’s static content by selecting your S3 bucket **Orgin Domain**, then select **Use website endpoint.** when prompted.
 3. Under Viewer Protocol Policy:
    - Select either Redirect HTTP to HTTPS or HTTPS Only to enhance security.
 4. Choose weather you would like to Enable or Disable **Web Application Firewall (WAF).** based on your security needs.
-5. Under the **Alternate domain name (CNAME) - optional** field, enter your custom domain name (ex., example.com or www.example.com).
+5. Under the **Alternate domain name (CNAME) - optional** field, select **Add item** then enter your custom domain name (ex., example.com or www.example.com).
     > **IMPORTANT:** Configuring a CNAME allows you to access your website using your custom domain.
 > *From here continue to Step 4.5*
 
-### Step 4.5: Request an SSL Certificate in AWS Certificate Manager
-6. Under "Custom SSL certificate - optional", choose **"Request Certificate"**
+### Step 4: CONTINUED: Request an SSL Certificate in AWS Certificate Manager
+6. Under "Custom SSL certificate - optional", choose **"Request Certificate"** > **Next**
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
-7. Wait for validation (can take a few minutes up to 48 hours)
-8. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+7. Enter Domain name > Then select **Request**
 
-> **Note:** May have to click the refresh icon  
-> **Also:** After creating, your distribution is not fully ready until the "**Last Modified**" changes from:
->
-> ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
->
-> **To:**  
->
-> ![Level 01 - static-website-s3/Resources/Images/last modified.png](<Resources/Images/last modified.png>)
+### Step 5: (OPTION 1): Configure DNS Records
+1. With the new Certificate selected, Select **Create records in Route 53** > **select** domain > **Create Records** 
+    > **Note:** If option to select you domain is greyed out, continue to **steps 3-6**
+2. Wait for validation (can take a few minutes up to 48 hours) until you see this:
+![alt text](<Resources/Images/ACM Status.png>)
 
-
-### Step 5: Configure DNS Records in Route 53
-#### Creating a CNAME Record:
-After your CloudFront distribution is set up, update your DNS records so that your domain directs visitors to your website:
-1. In the **Request a public certificate** wizard: > Enter your domain name > DNS validation > Request
-2. Within the **AWS Certificate Manager (ACM)** console:
-   - Choose the **"Create records in Route 53"** > **Create records**<br><br>
-   > **Note:** If option to select "Create Records" is unavailable:
+### Step 5 (OPTION 2 FIX - ONLY IF "OPTION 1" DOESN'T WORK): Creating a CNAME Record Manually
+5. Update your DNS records so that your domain directs visitors to your website:
   > Within the **AWS Certificate Manager (ACM)** console:
   > - Find your requested certificate and **expand** the domain details to see the **CNAME** record needed for validation.
   > - **Copy** the **Name** and **Value** for the CNAME record exactly as shown in ACM.
@@ -99,8 +89,23 @@ After your CloudFront distribution is set up, update your DNS records so that yo
   > - **Record name**: Paste the **Name** from ACM (including any underscores).
   > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
   > - Paste the **Value** from ACM.
+6. Wait for validation (can take a few minutes up to 48 hours)
+![alt text](<Resources/Images/ACM Status.png>)
 
-#### Creating an A Record:
+### Step 6: Complete CloudFront distribution setup
+7. Back in the **CloudFront distribution** > Under **Custom SSL certificate - optional** > Assign the new **ACM certificate** for encrypted communication.
+> **Note:** May have to click the refresh icon  
+4. Select **"Create Distribution"**
+> **Note:** After creating, your distribution is not fully ready until the "**Last Modified**" changes from:
+>
+> ![Level 01 - static-website-s3/Resources/Images/deploying.png](Resources/Images/deploying.png)
+>
+> **To:**  
+>
+> ![Level 01 - static-website-s3/Resources/Images/last modified.png](<Resources/Images/last modified.png>)
+
+
+### Step 7: Creating an A Record:
 3. Open your domain's hosted zone in the **Route 53** console.
 4. Create a new record:
    - **Record Type:** A – IPv4 address
@@ -110,7 +115,7 @@ After your CloudFront distribution is set up, update your DNS records so that yo
    - **TTL:** Use the default value
 3. *(Optional)* For subdomain redirection (ex., `www.example.com`), create a **CNAME** record pointing to your CloudFront distribution's domain name.
 
-### Step 6: Test the Deployment
+### Step 8: Test the Deployment
 1. Open your domain in a browser to verify that everything is working correctly.
 2. Check SSL status and CloudFront caching behavior and that that the SSL padlock appears if you configured https.<br><br><br>
 
