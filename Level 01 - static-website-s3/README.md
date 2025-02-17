@@ -72,7 +72,8 @@ This repository showcases my AWS projects and lessons learned while deploying a 
     > **Note:** May also do this by going to the AWS Certificate Manager (ACM) console
 7. Enter Domain name > Then select **Request**
 
-### Step 5: (OPTION 1): Configure DNS Records
+## Configure DNS Records
+### Step 5: (OPTION 1): Creating a CNAME Record 
 1. With the new Certificate selected, Select **Create records in Route 53** > **select** domain > **Create Records** 
     > **Note:** If option to select you domain is greyed out, continue to **steps 3-6**
 2. Wait for validation (can take a few minutes up to 48 hours) until you see this:
