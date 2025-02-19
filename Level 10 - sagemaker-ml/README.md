@@ -1,1 +1,0 @@
-Project 5: Train and deploy a machine learning model using Amazon SageMaker
