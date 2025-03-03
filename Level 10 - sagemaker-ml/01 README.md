@@ -11,6 +11,6 @@ This Folder provides two guides for setting up an Amazon SageMaker working envir
 ## Which One Should You Use?  
 
 - Choose the **Docker & Kubernetes** version if you need scalability, flexibility, and a standardized environment across teams.  
-- Choose the **No Containers** version if you prefer a straightforward AWS-managed solution for experimentation and development.  
+- Choose the **No Containers** version if you prefer a straightforward, beginners-friendly, AWS-managed solution for experimentation and development.  
 
 Both approaches ensure a productive SageMaker setup, allowing you to develop, train, and deploy ML models efficiently.
