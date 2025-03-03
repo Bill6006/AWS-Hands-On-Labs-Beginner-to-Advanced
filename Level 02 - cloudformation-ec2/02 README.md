@@ -6,11 +6,11 @@ This guide walks you through using AWS CloudFormation Designer to visually creat
 
 ## AWS Services Used
 
-- **AWS CloudFormation Designer** – To visually design and edit your infrastructure template  
-- **Amazon VPC** – To create a virtual network for your resources  
-- **Amazon EC2** – To host your web server instance  
-- **Security Groups** – To control network traffic for your EC2 instance  
-- **Internet Gateway & Route Table** – To enable Internet connectivity for your VPC
+- **AWS CloudFormation Designer*** – To visually design and edit your infrastructure template  
+- **Amazon VPC*** – To create a virtual network for your resources  
+- **Amazon EC2*** – To host your web server instance  
+- **Security Groups*** – To control network traffic for your EC2 instance  
+- **Internet Gateway & Route Table*** – To enable Internet connectivity for your VPC
 
 ---
 
