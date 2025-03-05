@@ -125,7 +125,8 @@ Outputs:
    - Under Parameters, adjust values as needed:
      - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.  
      - **InstanceType:** Choose `t2.micro` or `t3.micro`.  
-     - **MyIP:** Provide your public IP in CIDR format (e.g., `203.0.113.1/32`).
+     - **MyIP:** Provide your public IP in CIDR format with a /32 suffix. (e.g., `203.0.113.1/32`).
+       > **Note:** You can find your public IP by going to ipchicken.com
 
 6. **Review and Submit:**  
    Click **Next** twice to review your settings, then click **Submit** to create the stack.
