@@ -1,3 +1,8 @@
+Below is one way to reformat the Level 02 README so that it visually follows the same structured layout as the Level 01 README—without altering any of the original content. You can save this as your new “02 README.md” file.
+
+---
+
+```markdown
 # How to Create a Basic Web Server with AWS CloudFormation Designer
 
 This guide walks you through using AWS CloudFormation Designer to visually create a CloudFormation template that provisions a basic web server running on an EC2 instance in a VPC. You’ll learn to add and connect resources, configure parameters and mappings, specify resource properties, and finally launch a CloudFormation stack to bring your web server online.
@@ -6,20 +11,15 @@ This guide walks you through using AWS CloudFormation Designer to visually creat
 
 ## AWS Services Used
 
-- **AWS CloudFormation Designer*** – To visually design and edit your infrastructure template  
-- **Amazon VPC*** – To create a virtual network for your resources  
-- **Amazon EC2*** – To host your web server instance  
-- **Security Groups*** – To control network traffic for your EC2 instance  
-- **Internet Gateway & Route Table*** – To enable Internet connectivity for your VPC
+- **AWS CloudFormation Designer** – To visually design and edit your infrastructure template  
+- **Amazon VPC** – To create a virtual network for your resources  
+- **Amazon EC2** – To host your web server instance  
+- **Security Groups** – To control network traffic for your EC2 instance  
+- **Internet Gateway & Route Table** – To enable Internet connectivity for your VPC
 
 ---
 
-Below is the content for a **readme.md** file that includes the full AWS CloudFormation walkthrough along with the provided CloudFormation template. You can save this content as `readme.md`.
-
----
-
-```markdown
-# AWS CloudFormation Walkthrough
+## AWS CloudFormation Walkthrough
 
 This document is based on the official AWS CloudFormation Getting Started walkthrough. It guides you through creating your first CloudFormation stack using the AWS Management Console. By following these steps, you'll learn how to provision basic AWS resources, monitor stack events, test your web server, and clean up afterward.
 
@@ -33,17 +33,15 @@ This walkthrough demonstrates the process of creating a CloudFormation stack wri
 
 ### Prerequisites
 
-- **AWS Account:** Ensure you have an AWS account with an IAM user or role that has permissions for Amazon EC2, Amazon S3, and CloudFormation (or administrative access).
+- **AWS Account:** Ensure you have an AWS account with an IAM user or role that has permissions for Amazon EC2, Amazon S3, and CloudFormation (or administrative access).  
 - **VPC:** You must have a Virtual Private Cloud (VPC) with internet access. The default VPC that comes with your account is sufficient for this exercise.
 
 ---
 
-## Create a CloudFormation Stack with the Console
-
-Follow these steps to create your CloudFormation stack:
+### Step-by-Step Instructions
 
 1. **Open the CloudFormation Console:**  
-   Visit [CloudFormation Console](https://console.aws.amazon.com).
+   Visit the [CloudFormation Console](https://console.aws.amazon.com).
 
 2. **Start Stack Creation:**  
    Choose **Create Stack**.
@@ -52,16 +50,16 @@ Follow these steps to create your CloudFormation stack:
    On the Create Stack page, select **Build from Infrastructure Composer**, then click **Create in Infrastructure Composer**. This takes you to Infrastructure Composer mode where you can upload and validate the template.
 
 4. **Upload and Validate the Template:**  
-   - Choose **Template** and copy/paste the CloudFormation template (provided below) into the template editor.
-   - Click **Validate** to ensure the YAML syntax is correct.
+   - Choose **Template** and copy/paste the CloudFormation template (provided below) into the template editor.  
+   - Click **Validate** to ensure the YAML syntax is correct.  
    - Next, choose **Create template** to upload it to an S3 bucket. (Note the S3 bucket name for later cleanup.)
 
 5. **Configure the Stack:**  
-   - Click **Next** on the Create Stack page.
-   - On the Specify Stack Details page, enter a stack name (for example, `MyTestStack`).
+   - Click **Next** on the Create Stack page.  
+   - On the Specify Stack Details page, enter a stack name (for example, `MyTestStack`).  
    - Under Parameters, adjust values as needed:
-     - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.
-     - **InstanceType:** Choose `t2.micro` or `t3.micro`.
+     - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.  
+     - **InstanceType:** Choose `t2.micro` or `t3.micro`.  
      - **MyIP:** Provide your public IP in CIDR format (e.g., `203.0.113.1/32`).
 
 6. **Review and Submit:**  
@@ -91,7 +89,7 @@ Parameters:
       - t3.micro
       - t2.micro
     ConstraintDescription: must be a valid EC2 instance type.
-    
+
   MyIP:
     Description: Your IP address in CIDR format (e.g. 203.0.113.1/32).
     Type: String
@@ -138,19 +136,19 @@ Outputs:
 
 ---
 
-## Monitor Stack Creation
+## Monitoring Stack Creation
 
-Once you submit your stack, CloudFormation begins creating the resources. The stack (e.g., `MyTestStack`) will appear with a status of `CREATE_IN_PROGRESS`. You can monitor the progress by following these steps:
+Once you submit your stack, CloudFormation begins creating the resources. The stack (e.g., `MyTestStack`) will appear with a status of `CREATE_IN_PROGRESS`. To monitor progress:
 
-1. In the CloudFormation console, select your stack.
-2. Navigate to the **Events** tab to see real-time status updates such as:
-   - `CREATE_IN_PROGRESS` when resource creation starts.
-   - `CREATE_COMPLETE` when a resource is successfully created.
-3. When the stack reaches `CREATE_COMPLETE`, your stack and its resources have been provisioned.
+- In the CloudFormation console, select your stack.
+- Navigate to the **Events** tab to see real-time status updates such as:  
+  - `CREATE_IN_PROGRESS` when resource creation starts.  
+  - `CREATE_COMPLETE` when a resource is successfully created.
+- When the stack reaches `CREATE_COMPLETE`, your stack and its resources have been provisioned.
 
 ---
 
-## Test the Web Server
+## Testing the Web Server
 
 After the stack is successfully created:
 
@@ -166,7 +164,7 @@ To avoid any unexpected charges, delete the stack and its resources when you’r
 
 ### Deleting the CloudFormation Stack
 
-1. Open the [CloudFormation console](https://console.aws.amazon.com).
+1. Open the CloudFormation console.
 2. Select your stack (`MyTestStack`) from the list.
 3. Click **Delete**.
 4. Confirm the deletion when prompted. The stack status will change to `DELETE_IN_PROGRESS` and then eventually disappear.
@@ -175,7 +173,7 @@ To avoid any unexpected charges, delete the stack and its resources when you’r
 
 If you created an S3 bucket to store your template, follow these steps:
 
-1. Open the [Amazon S3 console](https://console.aws.amazon.com).
+1. Open the Amazon S3 console.
 2. In the left navigation pane, click **Buckets**.
 3. Select your bucket and choose **Empty**. Confirm by typing `permanently delete`.
 4. Once emptied, select the bucket again and choose **Delete**.
