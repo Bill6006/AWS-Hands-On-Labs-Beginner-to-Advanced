@@ -117,6 +117,7 @@ Outputs:
 
    - Click **Validate** to ensure the YAML syntax is correct.  
    - Next, choose **Create template** to upload it to an S3 bucket. (Note the S3 bucket name for later cleanup.)
+   > **Note:** When you click Create template in the console, AWS CloudFormation creates a S3 Bucket if not already made, then uploads the template file it. It also connects this stack to the existing default VPC if there is not one already made.
 
 5. **Configure the Stack:**  
    - Click **Next** on the Create Stack page.  
