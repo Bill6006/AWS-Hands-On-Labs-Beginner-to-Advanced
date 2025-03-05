@@ -180,24 +180,3 @@ If you created an S3 bucket to store your template, follow these steps:
 
 Delete everything below after looking at:
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/gettingstarted.walkthrough.html
-
-
-Below are the elements in the YAML template that indicate which AWS services are being used or referenced:
-
-- **AWS CloudFormation**:  
-  - The entire file is a CloudFormation template, as shown by the header (`AWSTemplateFormatVersion: 2010-09-09`) and the overall structure (Parameters, Resources, Outputs). This tells AWS CloudFormation to process the template.
-
-- **Amazon EC2**:  
-  - **EC2 Instance Creation**: The resource named `WebServer` is defined with the type `AWS::EC2::Instance`, which tells CloudFormation to create an EC2 instance.  
-  - **Security Group for EC2**: The resource named `WebServerSecurityGroup` is defined with the type `AWS::EC2::SecurityGroup`, indicating that a security group (a networking feature for EC2) is being created.
-
-- **AWS Systems Manager (SSM) Parameter Store**:  
-  - In the `Parameters` section, the parameter `LatestAmiId` is defined with the type `AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>`. This instructs CloudFormation to fetch the latest Amazon Linux 2 AMI ID from the SSM Parameter Store.
-
-- **Amazon S3 (Indirectly)**:  
-  - While the YAML does not contain any resource of type `AWS::S3::Bucket`, the walkthrough instructions mention uploading the template to an S3 bucket. This implies that S3 is used for storing the template file, even though it isn’t defined within the template.
-
-- **Amazon VPC (Implicitly)**:  
-  - The template doesn’t include any VPC resource definitions. Instead, it assumes you are using an existing VPC (typically the default VPC) with internet access for the EC2 instance. This dependency is mentioned in the prerequisites, not in the YAML.
-
-Each of these elements shows how the template leverages AWS services either directly through resource definitions or indirectly through operational requirements.
