@@ -14,296 +14,170 @@ This guide walks you through using AWS CloudFormation Designer to visually creat
 
 ---
 
-## AWS Architecture Diagram
-
-![AWS architecture diagram](<Resources/Images/AWS architecture diagram.png>)
+Below is the content for a **readme.md** file that includes the full AWS CloudFormation walkthrough along with the provided CloudFormation template. You can save this content as `readme.md`.
 
 ---
 
-## Deployment Steps
+```markdown
+# AWS CloudFormation Walkthrough
 
-### Step 1: Add and Connect Resources
+This document is based on the official AWS CloudFormation Getting Started walkthrough. It guides you through creating your first CloudFormation stack using the AWS Management Console. By following these steps, you'll learn how to provision basic AWS resources, monitor stack events, test your web server, and clean up afterward.
 
-> **Note:** This step uses the drag-and-drop interface of CloudFormation Designer. All resources are added from the EC2 category.
-
-1. **Open CloudFormation Designer:**  
-   - Navigate to [AWS CloudFormation Designer](https://console.aws.amazon.com/cloudformation/designer).
-
-2. **Set the Template Name:**  
-   - In the integrated editor (lower half), click the Edit (pencil) icon and change the template name to `BasicWebServerInVPC`.
-
-3. **Add a VPC:**  
-   - From the Resource types pane, drag a **VPC** resource onto the canvas.  
-   - Rename it to `VPC`.
-
-4. **Add a Subnet:**  
-   - Drag a **Subnet** resource into the VPC container and rename it to `PublicSubnet`.  
-   - *This subnet will host your EC2 instance.*
-
-5. **Add an EC2 Instance:**  
-   - Drag an **Instance** resource inside the `PublicSubnet` and rename it to `WebServerInstance`.
-
-6. **Add a Security Group:**  
-   - Drag a **SecurityGroup** resource into the VPC and rename it to `WebServerSecurityGroup`.
-
-7. **Add an Internet Gateway:**  
-   - Drag an **InternetGateway** resource onto the canvas (outside the VPC) and rename it to `InternetGateway`.
-
-8. **Connect the Internet Gateway:**  
-   - Hover over the Internet gateway attachment (created as `AWS::EC2::VPCGatewayAttachment`) on the **InternetGateway** resource and drag a connection to the `VPC`.  
-   - This creates an attachment associating the Internet gateway with the VPC.
-
-9. **Add a Route Table and Route:**  
-   - Drag a **RouteTable** resource inside the VPC and rename it to `PublicRouteTable`.  
-   - Then, add a **Route** resource inside `PublicRouteTable` and rename it to `PublicRoute`.  
-   - Configure the route to direct all traffic (`0.0.0.0/0`) to the Internet gateway by connecting its `GatewayId` to `InternetGateway`.
-
-10. **Establish Dependencies:**  
-    - Create an explicit dependency from `PublicRoute` to the gateway attachment by dragging a connection from the `DependsOn` dot on `PublicRoute` to the `AWS::EC2::VPCGatewayAttachment`.  
-    - Drag another connection from the `WebServerInstance` resource to the `PublicRoute` resource, ensuring the instance depends on the public route for Internet access.
-
-11. **Associate the Route Table:**  
-    - Connect `PublicRouteTable` to `PublicSubnet` so that the subnet uses the public route table.
-
-12. **Save Your Template:**  
-    - From the File menu (file icon) in CloudFormation Designer, save the template locally to avoid losing your work.
+*Note:* While CloudFormation itself is free, you will be charged for the underlying AWS resources (e.g., Amazon EC2 and Amazon S3) that you create. If you're new to AWS, you can use the [AWS Free Tier](https://aws.amazon.com/free/) to minimize or eliminate costs during your testing.
 
 ---
 
-### Step 2: Add Parameters, Mappings, and Outputs
+## Creating Your First Stack
 
-> **Tip:** Using parameters and mappings makes your template flexible and reusable across environments.
+This walkthrough demonstrates the process of creating a CloudFormation stack written in YAML—a human-readable format that is widely used for defining infrastructure as code. For a guided, hands-on workshop, see [Getting Started with AWS CloudFormation](https://catalog.us-east-1.prod.workshops.aws).
 
-1. **Add Parameters:**  
-   - Click on an open area of the canvas to access template-level components, then switch to the **Parameters** tab in the integrated editor.  
-   - Add the following parameters (available in both JSON and YAML):
+### Prerequisites
 
-   **YAML Example:**
-   ```yaml
-   Parameters:
-     InstanceType:
-       Description: WebServer EC2 instance type
-       Type: String
-       Default: t2.small
-       AllowedValues:
-         - t1.micro
-         - t2.nano
-         - t2.micro
-         - t2.small
-         - t2.medium
-         - t2.large
-         - m1.small
-         - m1.medium
-         - m1.large
-         - m1.xlarge
-         - m2.xlarge
-         - m2.2xlarge
-         - m2.4xlarge
-         - m3.medium
-         - m3.large
-         - m3.xlarge
-         - m3.2xlarge
-         - m4.large
-         - m4.xlarge
-         - m4.2xlarge
-         - m4.4xlarge
-         - m4.10xlarge
-         - c1.medium
-         - c1.xlarge
-         - c3.large
-         - c3.xlarge
-         - c3.2xlarge
-         - c3.4xlarge
-         - c3.8xlarge
-         - c4.large
-         - c4.xlarge
-         - c4.2xlarge
-         - c4.4xlarge
-         - c4.8xlarge
-         - g2.2xlarge
-         - g2.8xlarge
-         - r3.large
-         - r3.xlarge
-         - r3.2xlarge
-         - r3.4xlarge
-         - r3.8xlarge
-         - i2.xlarge
-         - i2.2xlarge
-         - i2.4xlarge
-         - i2.8xlarge
-         - d2.xlarge
-         - d2.2xlarge
-         - d2.4xlarge
-         - d2.8xlarge
-         - hi1.4xlarge
-         - hs1.8xlarge
-         - cr1.8xlarge
-         - cc2.8xlarge
-         - cg1.4xlarge
-       ConstraintDescription: must be a valid EC2 instance type.
-     KeyName:
-       Description: Name of an EC2 KeyPair for SSH access
-       Type: AWS::EC2::KeyPair::KeyName
-       ConstraintDescription: must be the name of an existing EC2 KeyPair.
-     SSHLocation:
-       Description: The IP address range to allow SSH access
-       Type: String
-       MinLength: '9'
-       MaxLength: '18'
-       Default: 0.0.0.0/0
-       AllowedPattern: '(\d{1,3}\.){3}\d{1,3}/(\d{1,2})'
-       ConstraintDescription: must be a valid IP CIDR range.
-   ```
-
-2. **Add Mappings:**  
-   - Switch to the **Mappings** tab and add a mapping to determine the AMI ID based on instance type and region:
-
-   **YAML Example:**
-   ```yaml
-   Mappings:
-     AWSInstanceType2Arch:
-       t2.micro:
-         Arch: HVM64
-       t2.small:
-         Arch: HVM64
-       t2.medium:
-         Arch: HVM64
-       # (Additional mappings as needed)
-     AWSRegionArch2AMI:
-       us-east-1:
-         HVM64: ami-0ff8a91507f77f867
-       us-west-2:
-         HVM64: ami-a0cfeed8
-       # (Add mappings for other regions)
-   ```
-
-3. **Add Outputs:**  
-   - Switch to the **Outputs** tab and add an output to display the web server’s URL using the instance’s public IP:
-
-   **YAML Example:**
-   ```yaml
-   Outputs:
-     WebsiteURL:
-       Value: !Join 
-         - ''
-         - - 'http://'
-           - !GetAtt WebServerInstance.PublicIp
-       Description: URL of the web server
-   ```
-
-4. **Save Your Changes:**  
-   - Save the updated template to preserve parameters, mappings, and outputs.
+- **AWS Account:** Ensure you have an AWS account with an IAM user or role that has permissions for Amazon EC2, Amazon S3, and CloudFormation (or administrative access).
+- **VPC:** You must have a Virtual Private Cloud (VPC) with internet access. The default VPC that comes with your account is sufficient for this exercise.
 
 ---
 
-### Step 3: Specify Resource Properties
+## Create a CloudFormation Stack with the Console
 
-> **Note:** Now you will define configuration details for each resource using the integrated JSON/YAML editor.
+Follow these steps to create your CloudFormation stack:
 
-1. **Configure the VPC:**  
-   - Select the `VPC` resource and add the following properties:
-     - `CidrBlock: 10.0.0.0/16`
-     - `EnableDnsSupport: true`
-     - `EnableDnsHostnames: true`
+1. **Open the CloudFormation Console:**  
+   Visit [CloudFormation Console](https://console.aws.amazon.com).
 
-2. **Configure the Public Subnet:**  
-   - Select `PublicSubnet` and add:
-     - `VpcId: !Ref VPC`
-     - `CidrBlock: 10.0.0.0/24`
+2. **Start Stack Creation:**  
+   Choose **Create Stack**.
 
-3. **Configure the Public Route:**  
-   - Select `PublicRoute` and add:
-     - `DestinationCidrBlock: 0.0.0.0/0`
-     - `RouteTableId: !Ref PublicRouteTable`
-     - `GatewayId: !Ref InternetGateway`
+3. **Use Infrastructure Composer:**  
+   On the Create Stack page, select **Build from Infrastructure Composer**, then click **Create in Infrastructure Composer**. This takes you to Infrastructure Composer mode where you can upload and validate the template.
 
-4. **Configure the Security Group:**  
-   - Select `WebServerSecurityGroup` and add:
-     - `VpcId: !Ref VPC`
-     - `GroupDescription: Allow HTTP and SSH access`
-     - **SecurityGroupIngress:**  
-       - Allow HTTP (port 80) from `0.0.0.0/0`  
-       - Allow SSH (port 22) from the `SSHLocation` parameter
+4. **Upload and Validate the Template:**  
+   - Choose **Template** and copy/paste the CloudFormation template (provided below) into the template editor.
+   - Click **Validate** to ensure the YAML syntax is correct.
+   - Next, choose **Create template** to upload it to an S3 bucket. (Note the S3 bucket name for later cleanup.)
 
-5. **Configure the EC2 Instance:**  
-   - Select `WebServerInstance` and set the following properties:
-     - `InstanceType: !Ref InstanceType`
-     - `ImageId: !FindInMap [ AWSRegionArch2AMI, !Ref 'AWS::Region', !FindInMap [ AWSInstanceType2Arch, !Ref InstanceType, Arch ] ]`
-     - `KeyName: !Ref KeyName`
-     - **NetworkInterfaces:**  
-       - Associate with the `PublicSubnet`  
-       - Set `AssociatePublicIpAddress` to true  
-       - Reference `WebServerSecurityGroup` in `GroupSet`
-     - **UserData:**  
-       - Base64-encode a script that installs and starts Apache HTTP Server. For example:
-         ```bash
-         #!/bin/bash -xe
-         yum update -y
-         yum install -y httpd
-         systemctl start httpd
-         systemctl enable httpd
-         echo "<h1>Congratulations, your web server is running!</h1>" > /var/www/html/index.html
-         ```
-6. **Add EC2 Metadata for Initialization:**  
-   - Under the `Metadata` tab for `WebServerInstance`, add an `AWS::CloudFormation::Init` section that instructs the instance (via cfn-init) to configure the web server and create a simple web page.
+5. **Configure the Stack:**  
+   - Click **Next** on the Create Stack page.
+   - On the Specify Stack Details page, enter a stack name (for example, `MyTestStack`).
+   - Under Parameters, adjust values as needed:
+     - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.
+     - **InstanceType:** Choose `t2.micro` or `t3.micro`.
+     - **MyIP:** Provide your public IP in CIDR format (e.g., `203.0.113.1/32`).
 
-7. **Validate and Save:**  
-   - Use the **Validate Template** button (check icon) to ensure there are no syntax errors. Save your changes.
+6. **Review and Submit:**  
+   Click **Next** twice to review your settings, then click **Submit** to create the stack.
 
 ---
 
-### Step 4: Provision Resources
+## CloudFormation Template
 
-> **Note:** Your template is now complete. It’s time to launch the CloudFormation stack and provision your web server.
+Below is the CloudFormation YAML template used in this walkthrough. This template defines parameters, resources (an EC2 instance and a security group), and outputs for your stack.
 
-1. **Create the Stack:**  
-   - From the CloudFormation Designer toolbar, click the **Create Stack** (cloud icon).  
-   - CloudFormation Designer will save your template to an S3 bucket and open the Create Stack Wizard.
+```yaml
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation Template for WebServer with Security Group and EC2 Instance
 
-2. **Specify Stack Details:**  
-   - Enter a stack name, for example, `BasicWebServerStack`.
-   - In the Parameters section, provide values for `InstanceType`, `KeyName`, and `SSHLocation` (ensure you enter a valid EC2 key pair and your CIDR for SSH).
+Parameters:
+  LatestAmiId:
+    Description: The latest Amazon Linux 2 AMI from the Parameter Store
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 
-3. **Review and Create:**  
-   - Review the stack details and click **Create**.
-   - Monitor the stack creation progress in the CloudFormation console’s Events tab.
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t3.micro
+      - t2.micro
+    ConstraintDescription: must be a valid EC2 instance type.
+    
+  MyIP:
+    Description: Your IP address in CIDR format (e.g. 203.0.113.1/32).
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    Default: 0.0.0.0/0
+    AllowedPattern: '^(\d{1,3}\.){3}\d{1,3}\/\d{1,2}$'
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
 
-4. **Test the Deployment:**  
-   - Once the stack status is `CREATE_COMPLETE`, go to the **Outputs** tab.
-   - Copy the URL from the `WebsiteURL` output and open it in your browser to verify that your web server is running.
+Resources:
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP access via my IP address
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: !Ref MyIP
+
+  WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref InstanceType
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      UserData: !Base64 |
+        #!/bin/bash
+        yum update -y
+        yum install -y httpd
+        systemctl start httpd
+        systemctl enable httpd
+        echo "<html><body><h1>Hello World!</h1></body></html>" > /var/www/html/index.html
+
+Outputs:
+  WebsiteURL:
+    Value: !Join
+      - ''
+      - - http://
+        - !GetAtt WebServer.PublicDnsName
+    Description: Website URL
+```
 
 ---
 
-## Additional Enhancements
+## Monitor Stack Creation
 
-- **Enable Logging & Monitoring:**  
-  Use AWS CloudWatch to monitor EC2 logs and performance.
-- **Implement Auto Scaling:**  
-  Modify the template to replace the single instance with an Auto Scaling group for higher availability.
-- **Improve Security:**  
-  Refine security group rules and restrict SSH access further.
+Once you submit your stack, CloudFormation begins creating the resources. The stack (e.g., `MyTestStack`) will appear with a status of `CREATE_IN_PROGRESS`. You can monitor the progress by following these steps:
 
----
-
-## Estimated Project AWS Costs
-
-For a small-scale deployment (using a single t2.small instance in the free tier region), monthly costs should be minimal – generally under a few dollars per month if you exceed free tier limits. Always review pricing details on [aws.amazon.com](http://aws.amazon.com).
+1. In the CloudFormation console, select your stack.
+2. Navigate to the **Events** tab to see real-time status updates such as:
+   - `CREATE_IN_PROGRESS` when resource creation starts.
+   - `CREATE_COMPLETE` when a resource is successfully created.
+3. When the stack reaches `CREATE_COMPLETE`, your stack and its resources have been provisioned.
 
 ---
 
-## Resources
+## Test the Web Server
 
-- [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) cite1†AWS CloudFormation  
-- [AWS CloudFormation Designer Walkthrough](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/working-with-templates-cfn-designer-walkthrough-createbasicwebserver.html) cite0†Documentation  
-- [Amazon EC2 Key Pairs Documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) cite10†Amazon EC2 key pairs  
+After the stack is successfully created:
 
----
-
-## Author
-
-Created by **Tyree** – Feel free to contribute or ask questions!
+1. Go to the **Outputs** tab in the CloudFormation console.
+2. Find the `WebsiteURL` output, which provides the public URL of your EC2 instance.
+3. Open the URL in your web browser; you should see a "Hello World!" message confirming that Apache HTTP Server is running on your EC2 instance.
 
 ---
 
-# End Of Project
+## Clean Up
+
+To avoid any unexpected charges, delete the stack and its resources when you’re finished testing.
+
+### Deleting the CloudFormation Stack
+
+1. Open the [CloudFormation console](https://console.aws.amazon.com).
+2. Select your stack (`MyTestStack`) from the list.
+3. Click **Delete**.
+4. Confirm the deletion when prompted. The stack status will change to `DELETE_IN_PROGRESS` and then eventually disappear.
+
+### Deleting the S3 Bucket (if applicable)
+
+If you created an S3 bucket to store your template, follow these steps:
+
+1. Open the [Amazon S3 console](https://console.aws.amazon.com).
+2. In the left navigation pane, click **Buckets**.
+3. Select your bucket and choose **Empty**. Confirm by typing `permanently delete`.
+4. Once emptied, select the bucket again and choose **Delete**.
+5. Confirm the bucket deletion.
 
