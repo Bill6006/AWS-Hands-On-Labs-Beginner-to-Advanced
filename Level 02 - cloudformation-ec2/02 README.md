@@ -2,7 +2,6 @@ Below is one way to reformat the Level 02 README so that it visually follows th
 
 ---
 
-```markdown
 # How to Create a Basic Web Server with AWS CloudFormation Designer
 
 This guide walks you through using AWS CloudFormation Designer to visually create a CloudFormation template that provisions a basic web server running on an EC2 instance in a VPC. You’ll learn to add and connect resources, configure parameters and mappings, specify resource properties, and finally launch a CloudFormation stack to bring your web server online.
@@ -52,7 +51,8 @@ This walkthrough demonstrates the process of creating a CloudFormation stack wri
 4. **Upload and Validate the Template:**  
    - Choose **Template** and copy/paste the following CloudFormation template into the template editor:
 
-```yaml
+### yaml
+```
 AWSTemplateFormatVersion: 2010-09-09
 Description: CloudFormation Template for WebServer with Security Group and EC2 Instance
 
