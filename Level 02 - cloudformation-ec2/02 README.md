@@ -50,26 +50,7 @@ This walkthrough demonstrates the process of creating a CloudFormation stack wri
    On the Create Stack page, select **Build from Infrastructure Composer**, then click **Create in Infrastructure Composer**. This takes you to Infrastructure Composer mode where you can upload and validate the template.
 
 4. **Upload and Validate the Template:**  
-   - Choose **Template** and copy/paste the CloudFormation template (provided below) into the template editor.  
-   - Click **Validate** to ensure the YAML syntax is correct.  
-   - Next, choose **Create template** to upload it to an S3 bucket. (Note the S3 bucket name for later cleanup.)
-
-5. **Configure the Stack:**  
-   - Click **Next** on the Create Stack page.  
-   - On the Specify Stack Details page, enter a stack name (for example, `MyTestStack`).  
-   - Under Parameters, adjust values as needed:
-     - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.  
-     - **InstanceType:** Choose `t2.micro` or `t3.micro`.  
-     - **MyIP:** Provide your public IP in CIDR format (e.g., `203.0.113.1/32`).
-
-6. **Review and Submit:**  
-   Click **Next** twice to review your settings, then click **Submit** to create the stack.
-
----
-
-## CloudFormation Template
-
-Below is the CloudFormation YAML template used in this walkthrough. This template defines parameters, resources (an EC2 instance and a security group), and outputs for your stack.
+   - Choose **Template** and copy/paste the following CloudFormation template into the template editor:
 
 ```yaml
 AWSTemplateFormatVersion: 2010-09-09
@@ -133,6 +114,20 @@ Outputs:
         - !GetAtt WebServer.PublicDnsName
     Description: Website URL
 ```
+
+   - Click **Validate** to ensure the YAML syntax is correct.  
+   - Next, choose **Create template** to upload it to an S3 bucket. (Note the S3 bucket name for later cleanup.)
+
+5. **Configure the Stack:**  
+   - Click **Next** on the Create Stack page.  
+   - On the Specify Stack Details page, enter a stack name (for example, `MyTestStack`).  
+   - Under Parameters, adjust values as needed:
+     - **LatestAmiId:** Defaults to the latest Amazon Linux 2 AMI.  
+     - **InstanceType:** Choose `t2.micro` or `t3.micro`.  
+     - **MyIP:** Provide your public IP in CIDR format (e.g., `203.0.113.1/32`).
+
+6. **Review and Submit:**  
+   Click **Next** twice to review your settings, then click **Submit** to create the stack.
 
 ---
 
