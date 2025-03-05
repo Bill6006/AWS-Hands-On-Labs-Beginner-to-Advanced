@@ -51,7 +51,7 @@ This walkthrough demonstrates the process of creating a CloudFormation stack wri
 4. **Upload and Validate the Template:**  
    - Choose **Template** and copy/paste the following CloudFormation template into the template editor:
 
-### CloudFormation template: yaml syntax
+### CloudFormation template - yaml syntax:
 ```
 AWSTemplateFormatVersion: 2010-09-09
 Description: CloudFormation Template for WebServer with Security Group and EC2 Instance
