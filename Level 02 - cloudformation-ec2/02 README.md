@@ -174,3 +174,7 @@ If you created an S3 bucket to store your template, follow these steps:
 4. Once emptied, select the bucket again and choose **Delete**.
 5. Confirm the bucket deletion.
 
+
+
+Delete:
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/gettingstarted.walkthrough.html
