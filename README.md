@@ -26,13 +26,13 @@ These projects may offer you a chance to accelerate your cloud career by working
 
 
 ### 1: Use CloudFormation to Launch an Amazon EC2 Web Server  
-*Folder: `Level 2 - cloudformation-ec2`*  
+*Folder: `Level 1 - cloudformation-ec2`*  
 Learn the power of Infrastructure as Code (IaC) by writing a CloudFormation template (in JSON or YAML) to deploy an EC2 web server. This project simplifies resource provisioning and promotes best practices for scalable deployments.
 
 ---
 
 ### 2: How to Deploy a Secure Serverless Static Website on AWS: S3, CloudFront, Route 53 & ACM 
-*Folder: `Level 1 - static-website-s3`*  
+*Folder: `Level 2 - static-website-s3`*  
 Build a cost-effective static website by leveraging Amazon S3, CloudFront, Route 53, and AWS Certificate Manager. This beginner-friendly project introduces you to core AWS services while hosting your website globally.
 
 ---
