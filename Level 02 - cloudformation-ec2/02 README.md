@@ -168,7 +168,7 @@ To avoid any unexpected charges, delete the stack and its resources when you’r
 
 ### Deleting the S3 Bucket (if applicable)
 
-If you created an S3 bucket to store your template, follow these steps:
+Either if you created an S3 bucket to store your template, or one was created for you, follow these steps:
 
 1. Open the Amazon S3 console.
 2. In the left navigation pane, click **Buckets**.
