@@ -1,112 +1,100 @@
-Below is your README content reformatted to mimic the layout of the reference file without changing any of the original text.
+# Deploying a Static Website to Amazon S3 with AWS CodeStar and CodePipeline
 
----
+This project demonstrates how to set up a continuous integration and continuous delivery (CI/CD) pipeline for a static website hosted on Amazon S3, utilizing AWS CodeStar for project management and AWS CodePipeline for automation.
 
-# CI/CD Pipeline for a Static Website on Amazon S3
+## Overview
 
-## Overview + Setup
+By integrating AWS CodeStar, you gain a unified project management interface that simplifies the setup and monitoring of your CI/CD pipeline. The workflow includes:
 
-### Overview
-This project demonstrates how to set up an automated CI/CD pipeline on AWS that deploys updates to a static website hosted on Amazon S3. The pipeline is triggered by changes in your GitHub repository, builds your site if needed, and then deploys the latest version to your S3 bucket.
+- **AWS CodeStar:** Provides a centralized dashboard to manage your project's resources, including CodePipeline, CodeCommit, and S3.
+- **AWS CodePipeline:** Automates the process of fetching code from the repository and deploying it to the S3 bucket.
+- **Amazon S3:** Serves as the hosting platform for your static website.
+- **AWS CodeCommit or GitHub:** Acts as the source repository for your website's code.
 
-Modern software delivery requires continuous integration and continuous deployment (CI/CD) to accelerate development and improve reliability. In this project, you'll create a pipeline that automatically deploys website changes:
-- **Source Stage:** Pulls updated website code from GitHub.
-- **Build Stage (Optional):** Builds or processes your website files (using AWS CodeBuild if required).
-- **Deploy Stage:** Deploys the site to an Amazon S3 bucket configured for static website hosting.
+## Prerequisites
 
-### Services Used
-- **Amazon S3:** Hosts the static website.
-- **AWS CodePipeline:** Orchestrates the end-to-end CI/CD process.
-- **AWS CodeBuild:** (Optional) Builds your application assets.
-- **AWS CodeStar:** (Optional) Provides an integrated interface for project management.
-- **GitHub:** Acts as the source repository for your website code.
+Before starting, ensure you have:
 
-### Prerequisites
-Before you begin, make sure you have:
-1. An AWS account with appropriate permissions.
-2. An S3 bucket set up for static website hosting.
-3. A GitHub repository containing your static website code.
-4. AWS CLI installed and configured (if you wish to use the CLI).
-5. (Optional) A `buildspec.yml` file in your repository if you need to build your site.
+- An **AWS account** with permissions to create and manage CodeStar, CodePipeline, S3, and CodeCommit resources.
+- A **static website** (HTML, CSS, JavaScript files) ready for deployment.
+- If using GitHub, a **GitHub account** with a repository containing your website's code.
+- If using CodeCommit, your website's code should be in a **local Git repository** ready for pushing to CodeCommit.
 
-### Pipeline Architecture
-1. **Source Stage:** CodePipeline monitors your GitHub repository for changes.
-2. **Build Stage (Optional):** If your website requires a build step (e.g., a React or Angular app), AWS CodeBuild runs the necessary commands.  
-   _Example `buildspec.yml`:_
-   ```yaml
-   version: 0.2
+## Setup Instructions
 
-   phases:
-     build:
-       commands:
-         - echo "Installing dependencies..."
-         - npm install
-         - echo "Building static assets..."
-         - npm run build
-   artifacts:
-     files:
-       - 'build/**/*'
-   ```
-3. **Deploy Stage:** CodePipeline deploys the updated website files to your Amazon S3 bucket. Be sure to enable the **Extract file before deploy** option if your source artifact is zipped.
+Follow these steps to set up your CI/CD pipeline with AWS CodeStar:
 
-### Setup Instructions
-#### 1. Prepare Your Static Website
-- Create or update your static website files (HTML, CSS, JavaScript).
-- Push your code to a GitHub repository.
-- (Optional) Add a `buildspec.yml` file if a build process is needed.
+### 1. Create an S3 Bucket for Static Website Hosting
 
-#### 2. Configure Your Amazon S3 Bucket
-- Create an S3 bucket and enable static website hosting.
-- Update the bucket policy to allow public read access (if required).
+1. **Sign in to the AWS Management Console** and open the S3 console.
+2. **Create a new S3 bucket**:
+   - Click on **"Create bucket"**.
+   - Enter a unique bucket name (e.g., `my-static-website-bucket`).
+   - Choose the AWS Region where you want to create the bucket.
+   - Click **"Create bucket"**.
+3. **Enable static website hosting**:
+   - Select your newly created bucket.
+   - Go to the **"Properties"** tab.
+   - Scroll down to **"Static website hosting"** and click **"Edit"**.
+   - Choose **"Enable"**.
+   - Specify the **index document** (e.g., `index.html`).
+   - Specify the **error document** if applicable.
+   - Click **"Save changes"**.
 
-#### 3. Create Your CI/CD Pipeline in AWS CodePipeline
-1. **Log into the AWS Management Console** and open AWS CodePipeline.
-2. **Create a new pipeline:**
-   - **Pipeline Name:** e.g., `StaticWebsiteCICDPipeline`
-   - **Service Role:** Either create a new role or use an existing one with necessary permissions.
-3. **Add Source Stage:**
-   - **Source Provider:** GitHub.
-   - **Repository:** Connect to your GitHub repository.
-   - **Branch:** Choose the branch to monitor.
-4. **Add Build Stage (Optional):**
-   - If your project requires building, add an AWS CodeBuild action.
-   - Otherwise, skip this stage.
-5. **Add Deploy Stage:**
-   - **Deploy Provider:** Amazon S3.
-   - **Bucket:** Specify your S3 bucket for hosting.
-   - **Extract file before deploy:** Enable this if the source artifact is a zip file.
-6. **Review and Create:** Once configured, create the pipeline.
-7. **Test the Pipeline:** Push a change to your GitHub repository and verify that the pipeline runs and your website updates automatically.
+### 2. Set Up AWS CodeStar Project
 
-#### 4. (Optional) Integrate AWS CodeStar
-- Create a CodeStar project to monitor and manage your CI/CD pipeline.
-- CodeStar offers additional dashboards and tools for managing AWS resources and can help simplify permissions and monitoring.
+1. **Navigate to the AWS CodeStar console**.
+2. Click on **"Create project"**.
+3. **Select a project template**:
+   - Choose **"Web application"**.
+   - Select **"Static Website"** as the project type.
+4. **Configure the project**:
+   - **Project Name:** Enter a unique name for your project.
+   - **Repository:** Choose between **AWS CodeCommit** or **GitHub**:
+     - For **CodeCommit**:
+       - AWS CodeStar will create a new CodeCommit repository for you.
+     - For **GitHub**:
+       - You'll need to connect your GitHub account and select the repository containing your website's code.
+5. **Set Up the Project**:
+   - AWS CodeStar will automatically set up the necessary resources, including CodePipeline and the repository.
+   - It will also configure IAM roles and permissions required for the services to interact.
 
-### Testing & Verification
-- **Commit a Change:** Update your website code and push it to GitHub.
-- **Pipeline Execution:** Monitor AWS CodePipeline for the progress of the build and deploy stages.
-- **Website Verification:** Access your website via the S3 endpoint (e.g., `http://your-bucket.s3-website-your-region.amazonaws.com`) to confirm that the latest changes have been deployed.
+### 3. Configure the CI/CD Pipeline
 
-### Troubleshooting
-- **Build Failures:** Check CodeBuild logs if the build stage fails.
-- **Deployment Issues:** Verify S3 bucket permissions and that the “Extract file before deploy” option is correctly set.
-- **GitHub Connection:** Ensure that your GitHub integration is working and that AWS CodePipeline has the correct permissions to access your repository.
+1. **Access the CodePipeline setup**:
+   - Within your CodeStar project dashboard, locate the **"CI/CD pipeline"** section and click on the provided link to open CodePipeline.
+2. **Verify Source Stage**:
+   - Ensure that the source stage is correctly set to your chosen repository (CodeCommit or GitHub) and the appropriate branch.
+3. **Configure Build Stage (Optional)**:
+   - If your static website requires a build process (e.g., using a static site generator or bundler), add a build stage using AWS CodeBuild.
+   - If no build is necessary, you can skip this stage.
+4. **Set Up Deploy Stage**:
+   - **Deploy Provider:** Select **"Amazon S3"**.
+   - **Bucket Name:** Enter the name of the S3 bucket you created for static website hosting.
+   - **Extract File Before Deploy:** Ensure this option is checked if your source artifacts are zipped.
 
-### References
-- [Automating CI/CD with AWS CodePipeline](https://www.pluralsight.com/resources/blog/cloud/automating-ci-cd-with-aws-codepipeline) citeturn0fetch1  
-- [AWS CodePipeline User Guide](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html) citeturn0search0  
-- [AWS Prescriptive Guidance Patterns](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/welcome.html) citeturn0fetch2
+### 4. Deploy Your Website
 
-### License
-This project is licensed under the [MIT License](LICENSE).
+1. **Push Code to Repository**:
+   - If using CodeCommit:
+     - Clone the repository to your local machine.
+     - Add your static website files to the repository.
+     - Commit and push the changes.
+   - If using GitHub:
+     - Ensure your static website files are committed and pushed to the selected repository.
+2. **Trigger the Pipeline**:
+   - Pushing changes to the repository will automatically trigger CodePipeline.
+   - Monitor the pipeline's progress through the AWS CodeStar dashboard or the CodePipeline console.
+3. **Verify Deployment**:
+   - Once the pipeline completes successfully, your static website should be live.
+   - Access your website using the S3 static website endpoint (e.g., `http://my-static-website-bucket.s3-website-us-east-1.amazonaws.com`).
 
----
+## References
 
-## Footer
+- [AWS CodeStar Documentation](https://docs.aws.amazon.com/codestar/latest/userguide/welcome.html)
+- [AWS CodePipeline User Guide](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)
+- [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
 
-© 2025 GitHub, Inc.  
-[Terms](https://docs.github.com) · [Privacy](https://docs.github.com) · [Security](#) · [Status](https://www.githubstatus.com) · [Docs](https://docs.github.com) · [Contact](https://support.github.com)
+## License
 
----
-
-Feel free to adjust any links or details in the footer to suit your project.
+This project is licensed under the MIT License.

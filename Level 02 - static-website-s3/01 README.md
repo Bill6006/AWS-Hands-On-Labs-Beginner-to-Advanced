@@ -53,8 +53,26 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ### Step 3: Configure Permissions
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
-   - The **Bucket Policy** file is also found in the **Resources** folder. (Copy code from this file then paste into Bucket Policy) 
+   - (Copy code from this file then paste into Bucket Policy) 
     > **Note:** You will need to change the `Bucket-Name` within the code, to your Bucket Name. Then **Save Changes**
+  ```
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::Bucket-Name/*"
+            ]
+        }
+    ]
+} 
+```
 2. Test to confirm Website is up and running by going to **Objects** > **index.html** > **Open**. 
 
 ### Step 4: Set Up CloudFront for Content Distribution
