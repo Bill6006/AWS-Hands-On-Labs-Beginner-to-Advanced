@@ -1,7 +1,3 @@
-Below is one way to reformat the Level 02 README so that it visually follows the same structured layout as the Level 01 README—without altering any of the original content. You can save this as your new “02 README.md” file.
-
----
-
 # How to Create a Basic Web Server with AWS CloudFormation Designer
 
 This guide walks you through using AWS CloudFormation Designer to visually create a CloudFormation template that provisions a basic web server running on an EC2 instance in a VPC. You’ll learn to add and connect resources, configure parameters and mappings, specify resource properties, and finally launch a CloudFormation stack to bring your web server online.
