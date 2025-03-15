@@ -1,9 +1,4 @@
-Below is the updated readme.md file with the suggested enhancements and clarifications integrated:
-
-
----
-
-CI/CD for a Secure Serverless Static Website on AWS
+## CI/CD for a Secure Serverless Static Website on AWS
 
 This repository showcases my AWS projects and lessons learned while deploying a secure static website using multiple AWS services. In this project, we integrate a CI/CD pipeline to automate the build, test, and deployment processes, ensuring that changes to your website are rapidly and reliably released.
 
