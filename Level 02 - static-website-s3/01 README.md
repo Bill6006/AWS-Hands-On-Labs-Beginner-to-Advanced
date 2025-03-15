@@ -53,7 +53,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ### Step 3: Configure Permissions
 1. Under Bucket's **Permissions** Tab, Edit the **Bucket Policy** to allow public read access.
-   - (Copy code from this file then paste into Bucket Policy) 
+   - (Copy the code below then paste into Bucket Policy) 
     > **Note:** You will need to change the `Bucket-Name` within the code, to your Bucket Name. Then **Save Changes**
   ```
     {
