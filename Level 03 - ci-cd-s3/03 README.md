@@ -77,7 +77,7 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    3. **Buildspec Instructions**:  
       - In the **CodeBuild** console, under **Buildspec**, select **Insert Build commands** then choose **Switch to editor**.  
       - **Copy and paste** the below Buildspec code into the Build Commands:
-   >**IMPORTANT:** For the code below, 
+   >**IMPORTANT:** For the code below, if you have muiltiple html files in one Repository, instead of the line "`- '**/*' `" instead change it to the file path where your html file and resource are located. (ex. `- 'Level 02 - static-website-s3/Resources/**'`)
       ```yaml
       version: 0.2
 
