@@ -7,11 +7,11 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 - ***AWS CodePipeline** – Orchestrates the CI/CD workflow
 - ***AWS CodeBuild** – Builds and tests the application
 - ***AWS CodeCommit / GitHub / GitLab** – Hosts the source code repository
+- ***AWS Lambda** – Performs CloudFront cache invalidation post-deployment
 - **Amazon S3** – Stores static website files
 - **Amazon CloudFront** – Distributes content globally with low latency
 - **AWS Certificate Manager (ACM)** – Manages SSL/TLS certificates for HTTPS
 - **Amazon Route 53** – Manages the domain name
-- ***AWS Lambda** – Performs CloudFront cache invalidation post-deployment
 
 ---
 
@@ -25,7 +25,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ### Prerequisites
 
-- A secure static website hosted on Amazon S3, distributed via CloudFront, with domain management through Route 53 and SSL/TLS certificates from ACM. See the separate guide for initial setup details.
+- A secure static website hosted on Amazon S3, distributed via CloudFront, with domain management through Route 53 and SSL/TLS certificates from ACM. See **Level 02** for initial setup details.
 - A source code repository (AWS CodeCommit, GitHub, or GitLab) containing your static website files and configuration files (like `buildspec.yml`).
 
 ### Step 1: Set Up a Source Code Repository
