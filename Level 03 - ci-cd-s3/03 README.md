@@ -73,7 +73,7 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    1. **Buildspec Instructions**: 
      - In the **CodeBuild** console, under **Buildspec**, select **Insert Build commands** then select **Switch to editor**.  
      - **Copy and Paste** the below Buildspec code into the requested Build Commands:
-     ```yaml
+      ```yaml
 version: 0.2
 
 phases:
@@ -90,7 +90,7 @@ phases:
 artifacts:
   files:
     - '**/*'
-```
+      ```
    This instructs CodeBuild to simply pass all files through without transformation.
 
    2. **Save the Project**  
