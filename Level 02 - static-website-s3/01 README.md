@@ -4,10 +4,10 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ## AWS Services Used
 
-- **Amazon S3** – To store static website files
-- **CloudFront** – To distribute content globally with low latency
-- **Route 53** – To manage the domain name
-- **AWS Certificate Manager** – To enable HTTPS with SSL/TLS
+- ***Amazon S3** – To store static website files
+- ***CloudFront** – To distribute content globally with low latency
+- ***Route 53** – To manage the domain name
+- ***AWS Certificate Manager** – To enable HTTPS with SSL/TLS
 
 ---
 
@@ -107,7 +107,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
   > - Go to **Hosted Zones** and select your domain.
   > - Create a **CNAME** record:
   > - **Record name**: Paste the **Name** from ACM (including any underscores).
-  > - If you see a final . or .<your-domain> added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
+  > - If you see a final . or .(your-domain) added and the end of the copied record name, remove that portion so it exactly matches the name provided by ACM.  
   > - Paste the **Value** from ACM.
 4. Wait for validation (can take a few minutes up to 48 hours)
 
