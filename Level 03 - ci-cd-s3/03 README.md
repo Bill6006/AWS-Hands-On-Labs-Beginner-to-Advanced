@@ -107,6 +107,8 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ---
 
+## Additional Deployment Steps (Common for Both Options)
+
 ### Step 1: Set Up a Source Code Repository
 
 1. **Choose and Initialize a Repository**:  
