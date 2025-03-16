@@ -4,14 +4,14 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 ## AWS Services Used
 
-- **AWS CodePipeline** – Orchestrates the CI/CD workflow
-- **AWS CodeBuild** – Builds and tests the application
-- **AWS CodeCommit / GitHub / GitLab** – Hosts the source code repository
+- ***AWS CodePipeline** – Orchestrates the CI/CD workflow
+- ***AWS CodeBuild** – Builds and tests the application
+- ***AWS CodeCommit / GitHub / GitLab** – Hosts the source code repository
 - **Amazon S3** – Stores static website files
 - **Amazon CloudFront** – Distributes content globally with low latency
 - **AWS Certificate Manager (ACM)** – Manages SSL/TLS certificates for HTTPS
 - **Amazon Route 53** – Manages the domain name
-- **AWS Lambda** – Performs CloudFront cache invalidation post-deployment
+- ***AWS Lambda** – Performs CloudFront cache invalidation post-deployment
 
 ---
 
