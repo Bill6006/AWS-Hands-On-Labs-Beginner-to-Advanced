@@ -1,13 +1,17 @@
+Below is the revised version with corrections to the markdown formatting (notably, the bold/italic markers in the AWS Services list have been fixed):
+
+---
+
 # CI/CD for a Secure Serverless Static Website on AWS
 
-This repository showcases AWS projects and lessons learned while deploying a secure static website using multiple AWS services. In this project, we integrate a CI/CD pipeline to automate the build, test, and deployment processes, ensuring that changes to your website are rapidly and reliably released.
+This repository showcases AWS projects and lessons learned while deploying a secure static website using multiple AWS services. In this project, we integrate a CI/CD pipeline to automate the build, test, and deployment processes—ensuring that changes to your website are rapidly and reliably released.
 
 ## AWS Services Used
 
-- ***AWS CodePipeline** – Orchestrates the CI/CD workflow  
-- ***AWS CodeBuild** – Builds and tests the application  
-- ***GitHub** – Hosts the source code repository  
-- ***AWS Lambda** – (Optional) Performs CloudFront cache invalidation post-deployment  
+- ***AWS CodePipeline*** – Orchestrates the CI/CD workflow  
+- ***AWS CodeBuild*** – Builds and tests the application  
+- ***GitHub*** – Hosts the source code repository  
+- ***AWS Lambda*** – (Optional) Performs CloudFront cache invalidation post-deployment  
 - **Amazon S3** – Stores static website files  
 - **Amazon CloudFront** – Distributes content globally with low latency  
 - **AWS Certificate Manager (ACM)** – Manages SSL/TLS certificates for HTTPS  
@@ -45,15 +49,15 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
 ### Step 2: Configure the CI/CD Pipeline with GitHub
 
-1. **Create a Pipeline** in **AWS CodePipeline**:
+1. **Create a Pipeline** in **AWS CodePipeline**:  
    - In the AWS Console, go to **CodePipeline** → **Create pipeline**.
-   - Choose **Build custom Pipeline**
+   - Choose **Build custom Pipeline**.
    - Provide a pipeline name (e.g., `MyStaticSitePipeline`).
    - Use or create a new **Service Role** if prompted.
    - Use the default S3 bucket for pipeline artifacts or specify your own.
    - Click **Next**.
 
-2. **Source Stage**:
+2. **Source Stage**:  
    - **Source provider**: Select **GitHub** (via the GitHub App connection).
    - **Connect to GitHub**: Follow prompts to install/authorize the GitHub App and connect your repository.
    - **Repository Name and Branch**: Choose your repo and the branch (e.g., `main`) that triggers the pipeline.
@@ -61,65 +65,66 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
 3. **Add Build and Deploy Stages**:
 
-   **3.1 Build Stage (AWS CodeBuild)**  
+   #### 3.1 Build Stage (AWS CodeBuild)
+
    1. **Action Provider**:  
       - Under “Build provider,” choose **Other build providers**.  
       - Select **AWS CodeBuild**.
 
-4. **Project Creation**:
+   2. **Project Creation**:  
+      - Choose your existing CodeBuild project if you have one, or click **Create project** to set one up and name it (ex. `MyStaticSiteBuild`).
 
-   **Project**
-      - Choose your existing CodeBuild project if you have one, or click **Create project** to set one up and name it (ex. MyStaticSiteBuild).  
-   1. **Buildspec Instructions**: 
-     - In the **CodeBuild** console, under **Buildspec**, select **Insert Build commands** then select **Switch to editor**.  
-     - **Copy and Paste** the below Buildspec code into the requested Build Commands:
+   3. **Buildspec Instructions**:  
+      - In the **CodeBuild** console, under **Buildspec**, select **Insert Build commands** then choose **Switch to editor**.  
+      - **Copy and paste** the below Buildspec code into the Build Commands:
 
-   
       ```yaml
-version: 0.2
+      version: 0.2
 
-phases:
-  install:
-    commands:
-      - echo "No dependencies to install for a plain static site."
-  build:
-    commands:
-      - echo "No build steps needed for a plain static site."
-  post_build:
-    commands:
-      - echo "Build phase complete."
+      phases:
+        install:
+          commands:
+            - echo "No dependencies to install for a plain static site."
+        build:
+          commands:
+            - echo "No build steps needed for a plain static site."
+        post_build:
+          commands:
+            - echo "Build phase complete."
 
-artifacts:
-  files:
-    - '**/*'
+      artifacts:
+        files:
+          - '**/*'
       ```
 
+      This instructs CodeBuild to simply pass all files through without transformation.
 
-   This instructs CodeBuild to simply pass all files through without transformation.
+   4. **Save the Project**:  
+      - After configuring everything in the pipeline wizard, click **Create build project**.
 
-   2. **Save the Project**  
-   - After configuring everything in the pipeline wizard, click **Create build project**. 
-      
-   3. **Input Artifacts**:  
-      - Select the output artifact from the Source stage (typically `SourceArtifact`).  
-   4. **Click Next** to proceed.
+   5. **Input Artifacts**:  
+      - Select the output artifact from the Source stage (typically `SourceArtifact`).
+
+   6. **Click Next** to proceed.
 
 ---
 
-   **3.2 Deploy Stage (S3 Deployment)**   
-   1. **Action provider**: Choose **Amazon S3**.  
-   2. **Input Artifact**: Set this to `BuildArtifact` (the output from the Build stage).  
-   3. **Bucket**: Select your S3 bucket that hosts the static site. 
-   4. **S3 object key:** give this a name ending it with .zip (ex. MyStaticSite.zip) 
-   > **Note**: This is so that CodePipeline can have a location to upload the build artifact. It will end up looking something like this: s3://mydomain.org/MyStaticSite.zip
-   4. **Click Next** and proceed.
+   #### 3.2 Deploy Stage (S3 Deployment)
 
-4. **(Optional) Lambda Cache Invalidation**:
-   - Configure a Lambda function to perform **CloudFront** cache invalidation after deployment.
+   1. **Action Provider**: Choose **Amazon S3**.  
+   2. **Input Artifact**: Set this to `BuildArtifact` (the output from the Build stage).  
+   3. **Bucket**: Select your S3 bucket that hosts the static site.  
+   4. **S3 Object Key**: Provide a name ending with `.zip` (ex. `MyStaticSite.zip`).  
+      > **Note**: This ensures CodePipeline has a location to upload the build artifact. It will look something like: `s3://mydomain.org/MyStaticSite.zip`.
+
+   5. **Click Next** and proceed.
+
+4. **(Optional) Lambda Cache Invalidation**:  
+   - Configure a Lambda function to perform **CloudFront** cache invalidation after deployment.  
    - Add this function as an action in your pipeline to ensure the cache is updated whenever new files are deployed.
 
-5. **Review and Create**:
-   - Confirm your pipeline configuration and click **Create pipeline**.
+5. **Review and Create**:  
+   - Confirm your pipeline configuration and click **Create pipeline**.  
    - The pipeline will attempt a first run, so ensure your repo has valid files.
 
 ---
@@ -139,6 +144,7 @@ artifacts:
 
 1. **Create a Build Specification File** (`buildspec.yml`):  
    Define your build phases and commands. If your site is purely static (HTML, CSS, JS with no build steps), you might only need a minimal build spec:
+
    ```yaml
    version: 0.2
 
@@ -156,3 +162,4 @@ artifacts:
    artifacts:
      files:
        - '**/*'
+   ```
