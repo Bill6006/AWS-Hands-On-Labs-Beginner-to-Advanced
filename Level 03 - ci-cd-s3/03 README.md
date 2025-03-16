@@ -6,7 +6,7 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 
 - ***AWS CodePipeline** – Orchestrates the CI/CD workflow
 - ***AWS CodeBuild** – Builds and tests the application
-- ***AWS CodeCommit / GitHub / GitLab** – Hosts the source code repository
+- ***AWS CodeCommit / GitHub** – Hosts the source code repository
 - ***AWS Lambda** – Performs CloudFront cache invalidation post-deployment
 - **Amazon S3** – Stores static website files
 - **Amazon CloudFront** – Distributes content globally with low latency
@@ -26,7 +26,86 @@ This repository showcases my AWS projects and lessons learned while deploying a 
 ### Prerequisites
 
 - A secure static website hosted on Amazon S3, distributed via CloudFront, with domain management through Route 53 and SSL/TLS certificates from ACM. See **Level 02** for initial setup details.
-- A source code repository (AWS CodeCommit, GitHub, or GitLab) containing your static website files and configuration files (like `buildspec.yml`).
+
+---
+
+## Option 1: Using AWS CodeCommit
+
+### Step 1: Set Up the CodeCommit Repository
+
+1. **Create a Repository**:  
+   - Navigate to the AWS CodeCommit console and click **Create repository**.
+   - Provide a unique repository name and description.
+   - Note the repository’s clone URL (HTTPS or SSH) for connecting your local environment.
+
+2. **Configure Your Local Environment**:  
+   - **Git Credentials**: Configure your Git credentials for HTTPS (via the IAM console) or set up SSH keys.
+   - **Clone the Repository**:
+     ```bash
+     git clone https://git-codecommit.<region>.amazonaws.com/v1/repos/YourRepositoryName
+     ```
+     Replace `<region>` and `YourRepositoryName` with your specific details.
+
+3. **Add Website Code and Configuration**:  
+   - Place your static website files and `buildspec.yml` file at the root of the repository.
+   - Commit and push the changes:
+     ```bash
+     git add .
+     git commit -m "Initial commit of static website and CI/CD configuration"
+     git push origin main
+     ```
+
+### Step 2: Configure the CI/CD Pipeline with CodeCommit
+
+1. **Create a Pipeline**:
+   - In AWS CodePipeline, click **Create pipeline**.
+   - Configure your pipeline name, service role, and artifact store (S3 bucket).
+
+2. **Add the Source Stage**:  
+   - **Source Provider**: Select **AWS CodeCommit**.
+   - **Repository Name**: Choose your CodeCommit repository.
+   - **Branch**: Specify the branch (e.g., `main`) that triggers the pipeline.
+
+3. **Add Build and Deploy Stages**:  
+   - **Build Stage**: Use AWS CodeBuild with your project configured to use the `buildspec.yml`.
+   - **Deploy Stage**: Configure deployment to your S3 bucket hosting the static website.
+
+4. **(Optional) Lambda Cache Invalidation**:  
+   - Create and configure a Lambda function to perform CloudFront cache invalidation post-deployment.
+   - Integrate this function into your pipeline as a post-deployment action.
+
+---
+
+## Option 2: Using GitHub
+
+### Step 1: Set Up the GitHub Repository
+
+1. **Create a Repository**:  
+   - On GitHub, create a new repository for your project.
+   - Initialize the repository (optionally with a README) and note the clone URL (HTTPS or SSH).
+
+2. **Clone and Populate the Repository**:  
+   - Following the instructions within Git to install and configure GitHub Desktop application. 
+
+### Step 2: Configure the CI/CD Pipeline with GitHub
+
+1. **Create a Pipeline**:
+   - In AWS CodePipeline, click **Create pipeline**.
+   - Set up your pipeline with a name, service role, and S3 artifact store.
+
+2. **Add the Source Stage**:  
+   - **Source Provider**: Select **GitHub**.
+   - **Repository Name and Branch**: Connect your GitHub account and choose the repository and branch (e.g., `main`) that will trigger the pipeline.
+
+3. **Add Build and Deploy Stages**:  
+   - **Build Stage**: Use AWS CodeBuild configured to use the `buildspec.yml` file from your repository.
+   - **Deploy Stage**: Configure deployment to your S3 bucket hosting the static website.
+
+4. **(Optional) Lambda Cache Invalidation**:  
+   - Configure a Lambda function to perform CloudFront cache invalidation after deployment.
+   - Add this function as an action in your pipeline to ensure cache is updated.
+
+---
 
 ### Step 1: Set Up a Source Code Repository
 
