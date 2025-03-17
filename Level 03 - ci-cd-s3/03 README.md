@@ -107,7 +107,7 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    5. **Input Artifacts**:  
       - Select the output artifact from the Source stage (typically `SourceArtifact`).
 
-   6. **Click Next** to proceed.
+   6. **Click Next** to proceed and you also **Skip** the testing portion if you like.
 
 ---
 
