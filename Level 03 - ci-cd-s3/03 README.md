@@ -54,8 +54,8 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    - Choose **Build custom Pipeline**.
    - Provide a pipeline name (e.g., `MyStaticSitePipeline`).
    - Use or create a new **Service Role** if prompted.
-   - Use the default S3 bucket for pipeline artifacts or specify your own.
-   > **Note:** Choose **"Custom Location"** to specify your own if using the S3 Bucket with the html file, created in **LEVEL 02**
+   - Specify your own the S3 bucket for pipeline artifacts by choosing **"Custom Location"**
+   > **Note:** This is the S3 Bucket created in **LEVEL 02** that contains the html file,
    - Click **Next**.
 
 2. **Source Stage**:  
