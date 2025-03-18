@@ -129,8 +129,13 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    - Confirm your pipeline configuration and click **Create pipeline**.  
    - The pipeline will attempt a first run, so ensure your repo has valid files.
 
+
 ---
 
+## Author
 
+Created by **Tyree** – Feel free to contribute or ask questions!
 
-FIGURE OUT WHY WHEN I PUSH GITHUB, MY STATIC WEBSITE UPDATE IN PIPELINE, BUT DOES NOT OVERWRITE THE HTML FILE IN THE S3 BUCKET THAT CONTAINS MY STATIC WEBSITE
+---
+
+# End Of Project

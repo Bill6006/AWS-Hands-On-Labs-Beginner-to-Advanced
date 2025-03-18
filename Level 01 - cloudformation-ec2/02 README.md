@@ -174,5 +174,12 @@ Either if you created an S3 bucket to store your template, or one was created fo
 
 
 
-Delete everything below after looking at:
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/gettingstarted.walkthrough.html
+---
+
+## Author
+
+Created by **Tyree** – Feel free to contribute or ask questions!
+
+---
+
+# End Of Project

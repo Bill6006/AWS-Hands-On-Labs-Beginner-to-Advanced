@@ -186,4 +186,9 @@ Overall, for a small static website, your monthly AWS bill (outside of domain re
 
 
 ## Author
+
 Created by **Tyree** – Feel free to contribute or ask questions!
+
+---
+
+# End Of Project
