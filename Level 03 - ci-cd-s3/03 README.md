@@ -118,8 +118,9 @@ This repository showcases AWS projects and lessons learned while deploying a sec
    3. **Bucket**: Select your S3 bucket that hosts the static site.  
    4. **S3 Object Key**: Provide a name ending with `.zip` (ex. `MyStaticSite.zip`).  
       > **Note**: This ensures CodePipeline has a location to upload the build artifact. It will look something like: `s3://mydomain.org/MyStaticSite.zip`.
+   5. **Select** "Extract file before deploy"
 
-   5. **Click Next** and proceed.
+   6. **Click Next** and proceed.
 
 4. **(Optional) Lambda Cache Invalidation**:  
    - Configure a Lambda function to perform **CloudFront** cache invalidation after deployment.  
