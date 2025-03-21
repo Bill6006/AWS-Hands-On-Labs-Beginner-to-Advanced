@@ -1,7 +1,3 @@
-Below is the revised version with corrections to the markdown formatting (notably, the bold/italic markers in the AWS Services list have been fixed):
-
----
-
 # CI/CD for a Secure Serverless Static Website on AWS
 
 This repository showcases AWS projects and lessons learned while deploying a secure static website using multiple AWS services. In this project, we integrate a CI/CD pipeline to automate the build, test, and deployment processes—ensuring that changes to your website are rapidly and reliably released.
