@@ -130,7 +130,7 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
    #### Additional IAM Policy for S3 Bucket Access
 
-   After the CodeBuild project is set up and its associated IAM role is created, it’s crucial to ensure that the role has the permissions required to interact with your S3 bucket. This is typically done by attaching the **AmazonS3FullAccess** policy (or a custom equivalent, such as `S3BucketFullAdmin`) to the role. This enables the role to perform all necessary S3 actions—like uploading, updating, or deleting files—during deployment.
+   After the CodeBuild project is set up and its associated IAM role is created, it’s crucial to ensure that the role has the permissions required to interact with your S3 bucket. This is typically done by attaching the **AmazonS3FullAccess** policy to the role. This enables the role to perform all necessary S3 actions—like uploading, updating, or deleting files—during deployment.
 
    **Steps to Attach the Policy:**
 
@@ -142,7 +142,7 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
    3. **Attach the Policy**:  
       - In the role details, click on **Attach policies**.
-      - Search for **AmazonS3FullAccess** (or your custom policy name, e.g., `S3BucketFullAdmin`).
+      - Search for **AmazonS3FullAccess**.
       - Select the policy and click **Attach policy**.
 
    4. **Review Permissions**:  
