@@ -81,18 +81,17 @@ This repository showcases AWS projects and lessons learned while deploying a sec
       phases:
          install:
             commands:
-             - echo "No dependencies to install for a plain static site."
-      build:
+            - echo "Installing dependencies..."
+       build:
          commands:
-            - echo "No build steps needed for a plain static site."
-      post_build:
-          commands:
-            - echo "Build phase complete."
-
+            - echo "No actual build steps needed for a static file."
+       post_build:
+         commands:
+            - echo "Uploading index.html directly to S3"
+            - aws s3 cp "Level 02 - static-website-s3/Resources/index.html" s3://YOUR-BUCKET-NAME/index.html --acl public-read
       artifacts:
-       files:
-        - '**/*'
-      discard-paths: yes 
+         files:
+          - 'Level 02 - static-website-s3/Resources/index.html'
       ```
 
       This instructs CodeBuild to simply pass all files through without transformation.
