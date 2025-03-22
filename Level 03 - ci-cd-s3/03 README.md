@@ -75,23 +75,47 @@ This repository showcases AWS projects and lessons learned while deploying a sec
       - In the **CodeBuild** console, under **Buildspec**, select **Insert Build commands** then choose **Switch to editor**.  
       - **Copy and paste** the below Buildspec code into the Build Commands:
    >**IMPORTANT:** For the code below, if you have multiple html files in one Repository, instead of the line "`- '**/*' `" instead change it to the file path where your html file and resource are located. (ex. `- 'Level 02 - static-website-s3/Resources/**'`)
+      **Option 1: (If HTML file is in a Subfolder)**  
+     > **IMPORTANT:** For the code below, if you have multiple HTML files in one repository, instead of the line "`- '**/*'`" change it to the file path where your HTML file and resources are located (ex. `- 'Level 02 - static-website-s3/Resources/**'`).
+     
       ```yaml
       version: 0.2
 
       phases:
-         install:
-            commands:
+        install:
+          commands:
             - echo "Installing dependencies..."
-       build:
-         commands:
+        build:
+          commands:
             - echo "No actual build steps needed for a static file."
-       post_build:
-         commands:
+        post_build:
+          commands:
             - echo "Uploading index.html directly to S3"
             - aws s3 cp "Level 02 - static-website-s3/Resources/index.html" s3://YOUR-BUCKET-NAME/index.html --acl public-read
       artifacts:
-         files:
+        files:
           - 'Level 02 - static-website-s3/Resources/index.html'
+      ```
+
+      **Option 2: (If HTML file is not in any subfolder)**
+
+      ```yaml
+      version: 0.2
+
+      phases:
+        install:
+          commands:
+            - echo "No dependencies to install for a plain static site."
+        build:
+          commands:
+            - echo "No build steps needed for a plain static site."
+        post_build:
+          commands:
+            - echo "Build phase complete."
+      artifacts:
+        files:
+          - '**/*'
+        discard-paths: yes
       ```
 
       This instructs CodeBuild to simply pass all files through without transformation.
@@ -104,7 +128,29 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
    6. **Click Next** to proceed and you also **Skip** the testing portion if you like.
 
----
+   #### Additional IAM Policy for S3 Bucket Access
+
+   After the CodeBuild project is set up and its associated IAM role is created, it’s crucial to ensure that the role has the permissions required to interact with your S3 bucket. This is typically done by attaching the **AmazonS3FullAccess** policy (or a custom equivalent, such as `S3BucketFullAdmin`) to the role. This enables the role to perform all necessary S3 actions—like uploading, updating, or deleting files—during deployment.
+
+   **Steps to Attach the Policy:**
+
+   1. **Open the IAM Console**:  
+      - Log in to your AWS Management Console and navigate to **IAM**.
+
+   2. **Locate Your Role**:  
+      - Find the IAM role that was created as part of your CodePipeline/CodeBuild setup.
+
+   3. **Attach the Policy**:  
+      - In the role details, click on **Attach policies**.
+      - Search for **AmazonS3FullAccess** (or your custom policy name, e.g., `S3BucketFullAdmin`).
+      - Select the policy and click **Attach policy**.
+
+   4. **Review Permissions**:  
+      - Confirm that the policy now appears in the role’s permissions list.
+
+   > **Security Note**: While the managed **AmazonS3FullAccess** policy grants complete access to S3, consider using a more restrictive custom policy that limits permissions to only the specific bucket needed for your static site deployment. This approach adheres to the principle of least privilege.
+
+   ---
 
    #### 3.2 Deploy Stage (S3 Deployment)
 
