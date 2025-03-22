@@ -79,20 +79,20 @@ This repository showcases AWS projects and lessons learned while deploying a sec
       version: 0.2
 
       phases:
-        install:
-          commands:
-            - echo "No dependencies to install for a plain static site."
-        build:
-          commands:
+         install:
+            commands:
+             - echo "No dependencies to install for a plain static site."
+      build:
+         commands:
             - echo "No build steps needed for a plain static site."
-        post_build:
+      post_build:
           commands:
             - echo "Build phase complete."
 
       artifacts:
-        files:
-          - '**/*' 
-        discard-paths: yes  
+       files:
+        - '**/*'
+      discard-paths: yes 
       ```
 
       This instructs CodeBuild to simply pass all files through without transformation.
