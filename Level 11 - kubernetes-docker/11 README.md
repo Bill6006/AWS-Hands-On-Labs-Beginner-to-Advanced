@@ -1,23 +1,26 @@
-# How to Deploy a Containerized Application with AWS EKS Workshop
+Below is a revised version of the project that focuses solely on Kubernetes using AWS EKS. In this version, we’re using pre-built container images (in this case, the official NGINX image available from AWS’s public registry) so that you can focus on mastering Kubernetes concepts, cluster management, service exposure, and monitoring. Docker-specific instructions (for building and managing container images) have been removed for now. You can revisit Docker later once you’re comfortable with the Kubernetes workflow.
 
-This guide walks you through setting up an Amazon EKS (Elastic Kubernetes Service) cluster using the AWS EKS Workshop. You will learn how to create a cluster, deploy a containerized application, expose it using a Load Balancer, and monitor your application with AWS CloudWatch. These step-by-step instructions are designed for beginners to get real-life experience in managing containerized workloads on AWS.
+---
+
+# How to Deploy a Containerized Application with AWS EKS (Kubernetes-Focused)
+
+This guide helps you create an AWS EKS cluster and deploy a containerized application using Kubernetes. You’ll learn how to create a cluster, deploy your application with a Kubernetes deployment, expose it via a LoadBalancer service, and monitor it using AWS CloudWatch. This version is designed for beginners to get hands-on experience with Kubernetes on AWS without the additional complexity of Docker image creation.
 
 ---
 
 ## AWS Services Used
 
 - **Amazon EKS** – Managed Kubernetes service to run containerized applications  
-- **Docker** – Containerize your application  
 - **AWS EC2** – Underlying compute for EKS worker nodes  
 - **Amazon VPC** – Virtual network automatically created for your cluster  
-- **AWS CloudWatch** – Monitor logs and performance of your containers  
+- **AWS CloudWatch** – Monitor logs and performance of your application  
 - **AWS IAM** – Manage permissions and security for cluster operations
 
 ---
 
 ## AWS Architecture Diagram
 
-![AWS architecture diagram](<Resources/Images/AWS-EKS-Architecture.png>)
+*(If you have access to an AWS-EKS architecture image, include it here.)*
 
 ---
 
@@ -25,160 +28,157 @@ This guide walks you through setting up an Amazon EKS (Elastic Kubernetes Servic
 
 ### Step 1: Prerequisites and Cluster Setup
 
-> **Note:** Before you begin, ensure you have installed the AWS CLI, eksctl, and kubectl. Also, configure your AWS credentials.
+> **Note:** Before you begin, ensure you have installed the following:
+>
+> - **AWS CLI:** Follow the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+> - **eksctl:** Install by following the instructions on [eksctl’s website](https://eksctl.io/introduction/installation/).
+> - **kubectl:** Get it from the [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/).
 
-1. **Install Prerequisites:**  
-   - **AWS CLI:** Follow the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).  
-   - **eksctl:** Install by following the instructions on [eksctl’s website](https://eksctl.io/introduction/installation/).  
-   - **kubectl:** Get it from the [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/).
-
-2. **Create Your EKS Cluster:**  
-   - Open your terminal and run:
-     ```bash
-     eksctl create cluster --name demo-cluster --region us-west-2 --nodes 2
-     ```
+1. **Create Your EKS Cluster:**  
+   Open your terminal and run:
+   ```bash
+   eksctl create cluster --name demo-cluster --region us-west-2 --nodes 2
+   ```
    - **What This Does:**  
-     - **Amazon VPC & Subnets:** Automatically creates a new VPC along with necessary subnets.  
-     - **EC2 Instances:** Provisions two worker nodes that run your containerized application.  
-   - **Verify Your Cluster:**  
-     Run:
-     ```bash
-     kubectl get nodes
-     ```
-     You should see the nodes listed, confirming your cluster is active.
+     - **Amazon VPC & Subnets:** Automatically creates a new VPC along with necessary subnets.
+     - **EC2 Instances:** Provisions two worker nodes that will run your containerized application.
+
+2. **Verify Your Cluster:**  
+   Run:
+   ```bash
+   kubectl get nodes
+   ```
+   You should see the nodes listed, confirming that your cluster is up and running.
 
 ---
 
 ### Step 2: Deploying Your Application
 
-> **Tip:** We’ll deploy a simple web application using a pre-built Docker image available in the workshop.
+> **Tip:** We’re deploying a simple web application using a pre-built container image (NGINX) that’s publicly available. This avoids Docker image creation, letting you focus on the Kubernetes side.
 
 1. **Create a Deployment Manifest:**  
-   - Create a file named `deployment.yaml` with the following content:
-     ```yaml
-     apiVersion: apps/v1
-     kind: Deployment
-     metadata:
-       name: sample-app
-     spec:
-       replicas: 2
-       selector:
-         matchLabels:
+   Create a file named `deployment.yaml` with the following content:
+   ```yaml
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: sample-app
+   spec:
+     replicas: 2
+     selector:
+       matchLabels:
+         app: sample-app
+     template:
+       metadata:
+         labels:
            app: sample-app
-       template:
-         metadata:
-           labels:
-             app: sample-app
-         spec:
-           containers:
-           - name: sample-app
-             image: public.ecr.aws/nginx/nginx:latest
-             ports:
-             - containerPort: 80
-     ```
-   - **Explanation:** This file defines a deployment that runs two replicas of a container based on the NGINX image.
+       spec:
+         containers:
+         - name: sample-app
+           image: public.ecr.aws/nginx/nginx:latest
+           ports:
+           - containerPort: 80
+   ```
+   - **Explanation:**  
+     This manifest defines a deployment that runs two replicas of a container using the official NGINX image, exposing port 80 in each pod.
 
 2. **Deploy the Application:**  
-   - Run:
-     ```bash
-     kubectl apply -f deployment.yaml
-     ```
-   - **Verify the Deployment:**  
-     Run:
-     ```bash
-     kubectl get deployments
-     ```
-     Ensure that the `sample-app` deployment shows up and that the desired number of replicas is running.
+   Run:
+   ```bash
+   kubectl apply -f deployment.yaml
+   ```
+
+3. **Verify the Deployment:**  
+   Check the status by running:
+   ```bash
+   kubectl get deployments
+   ```
+   Confirm that the `sample-app` deployment is running with the desired number of replicas.
 
 ---
 
 ### Step 3: Exposing the Application
 
-> **Note:** To access your application from the internet, you need to create a service that exposes it externally.
+> **Note:** To access your application from the internet, create a Kubernetes Service that exposes it externally.
 
 1. **Create a Service Manifest:**  
-   - Create a file named `service.yaml` with the following content:
-     ```yaml
-     apiVersion: v1
-     kind: Service
-     metadata:
-       name: sample-app-service
-     spec:
-       type: LoadBalancer
-       selector:
-         app: sample-app
-       ports:
-       - port: 80
-         targetPort: 80
-     ```
-   - **Explanation:** This manifest creates a Kubernetes Service of type LoadBalancer that directs incoming traffic on port 80 to your application pods.
+   Create a file named `service.yaml` with the following content:
+   ```yaml
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: sample-app-service
+   spec:
+     type: LoadBalancer
+     selector:
+       app: sample-app
+     ports:
+     - port: 80
+       targetPort: 80
+   ```
+   - **Explanation:**  
+     This manifest creates a Kubernetes Service of type LoadBalancer that routes incoming traffic on port 80 to your application pods.
 
 2. **Deploy the Service:**  
-   - Run:
-     ```bash
-     kubectl apply -f service.yaml
-     ```
-   - **Access Your Application:**  
-     - Run:
-       ```bash
-       kubectl get services
-       ```
-     - Look for the `EXTERNAL-IP` under `sample-app-service`. Once it appears, open your browser and navigate to that IP address to view your running application.
+   Run:
+   ```bash
+   kubectl apply -f service.yaml
+   ```
+
+3. **Access Your Application:**  
+   Check the service details with:
+   ```bash
+   kubectl get services
+   ```
+   When an `EXTERNAL-IP` appears for `sample-app-service`, open your browser and navigate to that IP address.
 
 ---
 
 ### Step 4: Monitoring and Tracing
 
-> **Tip:** Monitoring is crucial to troubleshoot and ensure your application is running smoothly.
+> **Tip:** Effective monitoring helps you quickly troubleshoot and maintain your application.
 
 1. **View Application Logs:**  
-   - To see logs from your pods, run:
-     ```bash
-     kubectl logs <pod-name>
-     ```
-   - Replace `<pod-name>` with the name of one of your application pods.
+   Access logs from your pods by running:
+   ```bash
+   kubectl logs <pod-name>
+   ```
+   Replace `<pod-name>` with the actual pod name.
 
 2. **Enable CloudWatch Container Insights:**  
-   - Follow the AWS EKS Workshop instructions to enable CloudWatch Container Insights. This feature automatically collects metrics and logs from your cluster, helping you monitor performance and troubleshoot issues.
+   Follow the [AWS EKS Workshop instructions](https://eksworkshop.com/) to enable CloudWatch Container Insights, which collects metrics and logs from your cluster.
 
 3. **(Optional) Set Up Distributed Tracing:**  
-   - If you wish to trace requests across services, refer to the tracing sections in the AWS EKS Workshop. You can integrate AWS X-Ray or other tracing tools to get deeper insights into your application’s behavior.
+   If you want to trace requests across services, consider integrating AWS X-Ray or a similar tool for deeper insights into your application’s behavior.
 
 ---
 
 ## Additional Enhancements
 
 - **Auto Scaling:**  
-  Configure a Horizontal Pod Autoscaler to automatically adjust the number of pods based on traffic load.
+  Configure a Horizontal Pod Autoscaler (HPA) to automatically adjust the number of pods based on your traffic load.
 - **Rolling Updates:**  
-  Use Kubernetes rolling update strategies to deploy new versions of your application with zero downtime.
+  Leverage Kubernetes rolling updates to deploy new versions of your application with zero downtime.
 - **CI/CD Integration:**  
-  Link your deployment with AWS CodePipeline and CodeBuild for continuous integration and deployment.
+  Integrate with AWS CodePipeline and CodeBuild for continuous deployment and integration.
 
 ---
 
 ## Estimated Project AWS Costs
 
 - **EKS Cluster:**  
-  Costs depend on the instance types and usage. For a demo cluster with two t3.medium instances, costs are generally minimal.
+  Cost depends on the instance types and usage. A demo cluster with two t3.medium instances typically incurs minimal costs.
 - **Load Balancer:**  
-  Charges are based on usage; refer to the AWS pricing calculator for detailed estimates.
+  Charges are based on usage; consult the AWS pricing calculator for details.
 - **Monitoring:**  
   CloudWatch costs depend on the volume of logs and metrics collected.
 
 ---
 
-## Resources
+## Summary
 
-- [AWS EKS Workshop](https://www.eksworkshop.com/) 0  
-- [AWS EKS User Guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) 1  
-
----
-
-## Author
-
-Created by **Tyree** – Feel free to contribute or ask questions!
+This revised project concentrates on delivering a thorough Kubernetes experience using AWS EKS. By using pre-built container images, you can dedicate your efforts to understanding cluster setup, deployments, service exposure, and monitoring. Once you’ve mastered these concepts, additional Docker-focused projects can help you learn how to build and manage your own container images.
 
 ---
 
-# End Of Project
+Feel free to ask for further guidance or for the Docker-specific module whenever you’re ready to expand your skillset further!
