@@ -1,7 +1,3 @@
-Below is a revised version of the project that focuses solely on Kubernetes using AWS EKS. In this version, we’re using pre-built container images (in this case, the official NGINX image available from AWS’s public registry) so that you can focus on mastering Kubernetes concepts, cluster management, service exposure, and monitoring. Docker-specific instructions (for building and managing container images) have been removed for now. You can revisit Docker later once you’re comfortable with the Kubernetes workflow.
-
----
-
 # How to Deploy a Containerized Application with AWS EKS (Kubernetes-Focused)
 
 This guide helps you create an AWS EKS cluster and deploy a containerized application using Kubernetes. You’ll learn how to create a cluster, deploy your application with a Kubernetes deployment, expose it via a LoadBalancer service, and monitor it using AWS CloudWatch. This version is designed for beginners to get hands-on experience with Kubernetes on AWS without the additional complexity of Docker image creation.
