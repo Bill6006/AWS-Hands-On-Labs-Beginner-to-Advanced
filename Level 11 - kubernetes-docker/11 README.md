@@ -27,7 +27,8 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
 > **Note:** Before you begin, ensure you have installed the following:
 >
 > - **AWS CLI:** Follow the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-> - **eksctl:** Install by following the instructions on [eksctl’s website](https://eksctl.io/introduction/installation/).
+> - **eksctl:** Install by following the instructions on [eksctl’s website](https://eksctl.io/installation/).
+> **Note:** eksctl is a command-line tool for creating and managing clusters on Amazon EKS
 > - **kubectl:** Get it from the [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/).
 
 1. **Create Your EKS Cluster:**  
