@@ -162,6 +162,7 @@ When you’re done experimenting, you can delete the entire EKS cluster (and all
 
 ```bash
 eksctl delete cluster --name demo-cluster --region us-east-1
+```
 
 --- 
 
