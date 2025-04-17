@@ -205,6 +205,7 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
    ```
    Then in the AWS Console, navigate to **CloudWatch → Container Insights → Performance Monitoring** for metrics, and **CloudWatch → Logs → Log groups** to find `/eks/demo-cluster/containerinsights`.
 
+
 3. **(Optional) Set Up Distributed Tracing:**  
    If you want to trace requests across services, consider integrating AWS X-Ray or a similar tool for deeper insights into your application’s behavior.
 
