@@ -90,8 +90,10 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
    ```bash
    kubectl get deployments
    ```
-   Confirm that the `sample-app` deployment is running with the desired number of replicas.
-
+   Confirm that the `sample-app` deployment is running with the desired number of replicas by running:
+      ```bash
+   kubectl get deployment sample-app
+      ```
 ---
 
 ### Step 3: Exposing the Application
@@ -197,4 +199,8 @@ This revised project concentrates on delivering a thorough Kubernetes experience
 | **Horizontal Pod Autoscaler** | Kubernetes feature to scale pod replicas automatically based on observed metrics.           |
 | **Rolling Update**            | Strategy to update application versions with zero downtime by incrementally replacing pods. |
 | **Distributed Tracing**       | Technique for tracking requests across microservices, e.g., via AWS X‑Ray.                  |
+| **Container**                 | Lightweight, standalone unit of software that packages code and its dependencies to run consistently across environments.                  |
+| **Image**                     | Read-only template used to create containers, including application code, runtime, and dependencies.                  |
+
+
 
