@@ -172,6 +172,21 @@ Either if you created an S3 bucket to store your template, or one was created fo
 4. Once emptied, select the bucket again and choose **Delete**.
 5. Confirm the bucket deletion.
 
+---
+
+## Key Terms
+
+| Term                              | Definition                                                                                                  |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Infrastructure Composer**       | Visual editor (CloudFormation Designer) for building and editing infrastructure-as-code templates.         |
+| **CloudFormation Template**       | YAML or JSON file that declares AWS resources and their configurations.                                    |
+| **Stack**                         | Collection of AWS resources managed together by CloudFormation.                                            |
+| **Mapping**                       | Static lookup tables within a template used to customize resource properties (e.g., region-specific AMIs). |
+| **Resource**                      | AWS component defined in a template (e.g., EC2 instance, security group).                                 |
+| **Output**                        | Declared values returned by a stack, visible in the console and usable by other stacks.                   |
+| **AWS::EC2::Instance**            | Resource type that provisions an EC2 virtual server.                                                        |
+| **AWS::EC2::SecurityGroup**       | Resource type defining firewall rules for EC2 instances.                                                   |
+| **Template Validation**           | Process of checking a template’s syntax and structure before provisioning resources.                       |
 
 
 ---

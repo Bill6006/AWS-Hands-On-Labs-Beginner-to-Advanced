@@ -16,7 +16,7 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
 
 ## AWS Architecture Diagram
 
-*(If you have access to an AWS-EKS architecture image, include it here.)*
+*(Put a AWS-EKS architecture image here.)*
 
 ---
 
@@ -26,19 +26,19 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
 
 > **Note:** Before you begin, ensure you have installed the following:
 >
-> - **AWS CLI:** Follow the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-> - **eksctl:** Install by following the instructions on [eksctl’s website](https://eksctl.io/installation/).
+> - **AWS CLI:** 
+> - **eksctl:** 
 > **Note:** eksctl is a command-line tool for creating and managing clusters on Amazon EKS
-> - **kubectl:** Get it from the [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/).
+> - **kubectl:**.
 
 1. **Create Your EKS Cluster:**  
    Open your terminal and run:
    ```bash
-   eksctl create cluster --name demo-cluster --region us-west-2 --nodes 2
+   eksctl create cluster --name demo-cluster --region us-east-1 --nodes 2
    ```
    - **What This Does:**  
      - **Amazon VPC & Subnets:** Automatically creates a new VPC along with necessary subnets.
-     - **EC2 Instances:** Provisions two worker nodes that will run your containerized application.
+     - **EC2 Instances:** Provisions two worker nodes (Instances) that will run your containerized application.
 
 2. **Verify Your Cluster:**  
    Run:
@@ -178,4 +178,23 @@ This revised project concentrates on delivering a thorough Kubernetes experience
 
 ---
 
-Feel free to ask for further guidance or for the Docker-specific module whenever you’re ready to expand your skillset further!
+## Key Terms
+
+| Term                          | Definition                                                                                  |
+|-------------------------------|---------------------------------------------------------------------------------------------|
+| **Amazon EKS**                | Managed Kubernetes service on AWS for running containerized workloads.                      |
+| **AWS EC2**                   | Elastic compute instances used as worker nodes in an EKS cluster.                           |
+| **Amazon VPC**                | Virtual private cloud that provides isolated networking for your cluster.                  |
+| **AWS CloudWatch**            | Monitoring service for collecting logs and metrics from AWS resources and applications.     |
+| **AWS IAM**                   | Identity and Access Management for configuring permissions and security.                   |
+| **eksctl**                    | CLI tool for creating and managing EKS clusters with simple commands.                       |
+| **kubectl**                   | Kubernetes CLI for deploying and managing resources in a cluster.                          |
+| **Deployment**                | Kubernetes object that ensures a specified number of pod replicas are running.              |
+| **Pod**                       | Smallest deployable unit in Kubernetes, encapsulating one or more containers.               |
+| **Service (LoadBalancer)**    | Kubernetes abstraction that exposes pods externally via an AWS ELB.                         |
+| **Replica**                   | Copy of a pod managed by a Deployment to provide high availability.                         |
+| **Manifest**                  | YAML file defining Kubernetes resources (e.g., Deployment, Service).                        |
+| **Horizontal Pod Autoscaler** | Kubernetes feature to scale pod replicas automatically based on observed metrics.           |
+| **Rolling Update**            | Strategy to update application versions with zero downtime by incrementally replacing pods. |
+| **Distributed Tracing**       | Technique for tracking requests across microservices, e.g., via AWS X‑Ray.                  |
+

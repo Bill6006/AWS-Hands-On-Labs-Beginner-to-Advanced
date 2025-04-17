@@ -174,6 +174,24 @@ This repository showcases AWS projects and lessons learned while deploying a sec
 
 ---
 
+## Key Terms
+
+| Term                                | Description                                                                                   |
+|-------------------------------------|-----------------------------------------------------------------------------------------------|
+| **CI/CD**                          | Automatically checks your code and puts it live without you having to do it manually.          |
+| **AWS CodePipeline**               | Orchestrates the stages of your CI/CD workflow (source, build, deploy).                        |
+| **AWS CodeBuild**                  | Serverless build service that compiles source, runs tests, and produces artifacts.             |
+| **AWS Lambda**                     | Optional compute service used for tasks like CloudFront cache invalidation.                    |
+| **Amazon S3**                      | Object storage for hosting static website files.                                               |
+| **Amazon CloudFront**              | Content Delivery Network (CDN) for caching and serving global content.                         |
+| **AWS Certificate Manager (ACM)**  | Service to provision and manage SSL/TLS certificates for HTTPS support.                        |
+| **Amazon Route 53**                | DNS web service for routing domain traffic to AWS resources.                                   |
+| **IAM (Identity and Access Management)** | Controls users, roles, and permissions across AWS services.                              |
+
+
+---
+
+
 ## Author
 
 Created by **Tyree** – Feel free to contribute or ask questions!

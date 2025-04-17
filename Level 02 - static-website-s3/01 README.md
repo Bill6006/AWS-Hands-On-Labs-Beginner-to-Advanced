@@ -180,6 +180,21 @@ Overall, for a small static website, your monthly AWS bill (outside of domain re
 - [AWS Route 53 Documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html)
 
 
+## Key Terms
+
+| Term                              | Definition                                                                                                                 |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Amazon S3**                     | Simple Storage Service for storing and hosting static website files.                                                       |
+| **Static Website Hosting**        | S3 feature that lets you serve a website directly from a bucket.                                                           |
+| **Bucket Policy**                 | A JSON document that defines who can access your S3 bucket and objects.                                                   |
+| **Amazon CloudFront**             | Global CDN that caches and delivers content from the nearest edge location.                                                |
+| **CloudFront Distribution**       | Configuration that tells CloudFront which origin to pull content from (e.g., an S3 bucket).                               |
+| **Amazon Route 53**               | DNS web service for registering domains and routing internet traffic to AWS resources.                                     |
+| **Hosted Zone**                   | Container in Route 53 for managing DNS records for a specific domain.                                                      |
+| **A (Alias) Record**              | DNS record that points your domain to AWS resources like CloudFront or S3 website endpoints.                              |
+| **CNAME Record**                  | DNS record that maps one domain name (e.g., `www.example.com`) to another (e.g., CloudFront distribution domain).          |
+| **AWS Certificate Manager (ACM)** | Service to provision, manage, and deploy SSL/TLS certificates for HTTPS on AWS services.                                   |
+| **DNS Validation**                | Method ACM uses to verify domain ownership by requiring a specific DNS record.                                             |
 
 
 ---
