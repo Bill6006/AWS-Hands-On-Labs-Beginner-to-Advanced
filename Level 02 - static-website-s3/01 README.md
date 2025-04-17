@@ -179,6 +179,7 @@ Overall, for a small static website, your monthly AWS bill (outside of domain re
 - [Amazon CloudFront User Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)
 - [AWS Route 53 Documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html)
 
+---
 
 ## Key Terms
 
