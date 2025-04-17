@@ -90,10 +90,8 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
    ```bash
    kubectl get deployments
    ```
-   Confirm that the `sample-app` deployment is running with the desired number of replicas by running:
-      ```bash
-   kubectl get deployment sample-app
-      ```
+   Confirm that the `sample-app` deployment is running with the desired number of replicas.
+
 ---
 
 ### Step 3: Exposing the Application
@@ -129,7 +127,7 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
    ```bash
    kubectl get services
    ```
-   When an `EXTERNAL-IP` appears for `sample-app-service`, open your browser and navigate to that IP address.
+   When an `EXTERNAL-IP` appears for `sample-app-service`, open your browser and navigate to that link.
 
 ---
 
@@ -138,11 +136,17 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
 > **Tip:** Effective monitoring helps you quickly troubleshoot and maintain your application.
 
 1. **View Application Logs:**  
-   Access logs from your pods by running:
+   Identify your pod name(s) by running the following:
+   ```bash
+   kubectl get pods
+   ```
+
+   The access logs from your pods by running:
    ```bash
    kubectl logs <pod-name>
    ```
    Replace `<pod-name>` with the actual pod name.
+   > **NOTE** Why this helps: Logs show live errors and output so you can quickly pinpoint and fix issues.
 
 2. **Enable CloudWatch Container Insights:**  
    Follow the [AWS EKS Workshop instructions](https://eksworkshop.com/) to enable CloudWatch Container Insights, which collects metrics and logs from your cluster.
@@ -151,6 +155,15 @@ This guide helps you create an AWS EKS cluster and deploy a containerized applic
    If you want to trace requests across services, consider integrating AWS X-Ray or a similar tool for deeper insights into your application’s behavior.
 
 ---
+
+### Step 5: Cleanup
+
+When you’re done experimenting, you can delete the entire EKS cluster (and all its resources) with:
+
+```bash
+eksctl delete cluster --name demo-cluster --region us-east-1
+
+--- 
 
 ## Additional Enhancements
 
@@ -200,7 +213,7 @@ This revised project concentrates on delivering a thorough Kubernetes experience
 | **Rolling Update**            | Strategy to update application versions with zero downtime by incrementally replacing pods. |
 | **Distributed Tracing**       | Technique for tracking requests across microservices, e.g., via AWS X‑Ray.                  |
 | **Container**                 | Lightweight, standalone unit of software that packages code and its dependencies to run consistently across environments.                  |
-| **Image**                     | Read-only template used to create containers, including application code, runtime, and dependencies.                  |
+| **Image**                     | Read-only template, like a blueprint, used to create containers, including application code, runtime, and dependencies.                  |
 
 
 
